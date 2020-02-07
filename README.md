@@ -1,1 +1,1 @@
-# senior-project-s20
+# Senior Project Spring 2020
