@@ -271,3 +271,10 @@ win/xaudacity.ico
 *.sublime-project
 *.sublime-workspace
 /tests/results/*.png
+
+# Ignore SteamVR package
+**/SteamVR/
+**/SteamVR*
+
+# Ignore vscode directory
+**/.vscode
