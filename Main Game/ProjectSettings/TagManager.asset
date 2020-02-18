@@ -7,6 +7,8 @@ TagManager:
   - projectile
   - FxTemporaire
   - Interactive
+  - SnapCollider
+  - SnappableObject
   layers:
   - Default
   - TransparentFX
