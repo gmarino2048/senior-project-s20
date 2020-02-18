@@ -24,6 +24,7 @@ public class SnapController: MonoBehaviour
             {
                 case "TopSnapCollider":
                     other.transform.position = new Vector3(transform.position.x, transform.position.y, transform.   position.z);                             // Used to lock the snappable object with respect to the snappable collider of the original object
+                    other.transform.rotation = transform.rotation;
                     //other.transform.position = new Vector3(transform.parent.position.x, transform.parent.position.y + sizeY, transform.parent.position.z); // Used to lock the snappable object with respect to the original object
                     other.GetComponentInParent<Rigidbody>().useGravity = false;
                     break;
