@@ -8,7 +8,7 @@ public class SnapController: MonoBehaviour
 
     void Start()
     {
-        sizeOfObject = transform.parent.parent.GetComponent<Collider>().bounds.size;
+        sizeOfObject = transform.parent.GetComponent<Collider>().bounds.size;
     }
 
     private void OnTriggerStay(Collider other)
@@ -22,8 +22,9 @@ public class SnapController: MonoBehaviour
             // Using switch in case we want to add more than one collider for an object
             switch (this.transform.tag) 
             {
-                case "SnapCollider":
-                    other.transform.position = new Vector3(transform.parent.parent.position.x, transform.parent.position.y + sizeY, transform.parent.position.z);
+                case "TopSnapCollider":
+                    other.transform.position = new Vector3(transform.parent.position.x, transform.parent.position.y + sizeY, transform.parent.position.z);
+                    other.GetComponentInParent<Rigidbody>().useGravity = false;
                     break;
             }
         }

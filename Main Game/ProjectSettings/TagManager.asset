@@ -9,6 +9,7 @@ TagManager:
   - Interactive
   - SnapCollider
   - SnappableObject
+  - TopSnapCollider
   layers:
   - Default
   - TransparentFX

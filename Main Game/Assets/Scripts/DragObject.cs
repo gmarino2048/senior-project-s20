@@ -22,6 +22,11 @@ public class DragObject : MonoBehaviour
         return Camera.main.ScreenToWorldPoint(mousePoint);  
     }
 
+    private void OnMouseUp()
+    {
+        this.GetComponent<Rigidbody>().useGravity = true;
+    }
+
     private void OnMouseDrag()
     {
         transform.position = GetMouseWorldPos() + mOffSet;
