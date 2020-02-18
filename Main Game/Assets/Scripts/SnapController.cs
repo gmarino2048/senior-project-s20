@@ -23,7 +23,8 @@ public class SnapController: MonoBehaviour
             switch (this.transform.tag) 
             {
                 case "TopSnapCollider":
-                    other.transform.position = new Vector3(transform.parent.position.x, transform.parent.position.y + sizeY, transform.parent.position.z);
+                    other.transform.position = new Vector3(transform.position.x, transform.position.y, transform.   position.z);                             // Used to lock the snappable object with respect to the snappable collider of the original object
+                    //other.transform.position = new Vector3(transform.parent.position.x, transform.parent.position.y + sizeY, transform.parent.position.z); // Used to lock the snappable object with respect to the original object
                     other.GetComponentInParent<Rigidbody>().useGravity = false;
                     break;
             }
