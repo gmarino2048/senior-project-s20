@@ -3,6 +3,7 @@
     Properties
     {
         _Color ("Color", Color) = (1,1,1,1)
+        _Alpha ("Alpha", Range(0,1)) = 1.0
         _FresnelColor ("Fresnel Color", Color) = (1,1,1,1)
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
         _Glossiness ("Smoothness", Range(0,1)) = 0.5
@@ -12,7 +13,11 @@
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags { "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" }
+
+        Blend OneMinusDstColor One
+        Cull Off Lighting Off ZWrite Off Fog { Color (0,0,0,0) }
+
         LOD 200
 
         CGPROGRAM
@@ -34,6 +39,7 @@
 
         half _Glossiness;
         half _Metallic;
+        half _Alpha;
         half3 _Emission;
         fixed4 _Color;
         float3 _FresnelColor;
@@ -48,13 +54,10 @@
 
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
-            // Albedo comes from a texture tinted by color
-            fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
-            o.Albedo = c.rgb;
             // Metallic and smoothness come from slider variables
             o.Metallic = _Metallic;
             o.Smoothness = _Glossiness;
-            o.Alpha = c.a;
+            o.Alpha = _Alpha;
 
             // Calculate fresnel dot product with world normal
             float fresnel = dot(IN.worldNormal, float3(0, 1, 0));
