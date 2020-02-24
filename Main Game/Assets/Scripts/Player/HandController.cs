@@ -17,7 +17,7 @@ public class HandController : MonoBehaviour {
 	private void Start() {
 		vrIn = FindObjectOfType<VRInputManager>();
 	}
-	
+
 	void Update() {
 		if (handFree) {
 			GameObject targetObject = CheckRaycast();
@@ -26,15 +26,17 @@ public class HandController : MonoBehaviour {
 				if (targetPCO != null) {
 					targetPCO.Highlight();
 					if (vrIn.GetTrigger(hand)) {
+						heldObject = targetObject;
+						handFree = false;
 						targetPCO.Interact(this);
 					}
 				}
 				else if (vrIn.GetTrigger(hand)) {
+					heldObject = targetObject;
+					handFree = false;
 					targetObject.transform.parent = hoverPosition;
 					targetObject.transform.localPosition = new Vector3(0, 0, 0);
 					targetObject.GetComponent<Rigidbody>().isKinematic = true;
-					heldObject = targetObject;
-					handFree = false;
 				}
 			}
 		}
@@ -42,13 +44,17 @@ public class HandController : MonoBehaviour {
 		else {
 			if (!vrIn.GetTrigger(hand)) {
 				if (!handFree) {
-					heldObject.GetComponent<Rigidbody>().isKinematic = false;
-					heldObject.transform.parent = null;
+					PointClickObject targetPCO = heldObject.GetComponent<PointClickObject>();
+					if (targetPCO != null)
+						targetPCO.Release(this);
+					else {
+						heldObject.GetComponent<Rigidbody>().isKinematic = false;
+						heldObject.transform.parent = null;
+					}
 					heldObject = null;
 					handFree = true;
 				}
 			}
-			//Can add more stuff for other inputs/interactions...
 		}
 	}
 

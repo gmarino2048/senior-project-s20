@@ -25,7 +25,7 @@ public class DemoButton : PointClickObject {
 			yield return new WaitForEndOfFrame();
 		}
 
-		Instantiate(ball, spawnPoint.position, new Quaternion());
+		SpawnBall();
 
 		while (timer > 0) {
 			timer -= Time.deltaTime;
@@ -34,5 +34,9 @@ public class DemoButton : PointClickObject {
 		}
 		isPressing = false;
 		transform.localPosition = originalPos;
+	}
+
+	public void SpawnBall() {
+		Instantiate(ball, spawnPoint.position, new Quaternion());
 	}
 }
