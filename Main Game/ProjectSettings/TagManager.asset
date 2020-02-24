@@ -10,6 +10,7 @@ TagManager:
   - SnapCollider
   - SnappableObject
   - TopSnapCollider
+  - Cog
   layers:
   - Default
   - TransparentFX
