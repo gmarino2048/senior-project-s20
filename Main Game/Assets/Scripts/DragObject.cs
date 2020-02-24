@@ -33,6 +33,7 @@ public class DragObject : MonoBehaviour
 	private void OnMouseDrag()
 	{
 		transform.position = GetMouseWorldPos() + mOffSet;
+
 	}   
 
 	public bool IsHeld()
