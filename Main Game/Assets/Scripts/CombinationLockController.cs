@@ -19,7 +19,7 @@ public class CombinationLockController : MonoBehaviour
                 currentCombination[0] = number;
                 break;
             case "Wheel2":
-                currentCombination[1] = number;
+				currentCombination[1] = number;
                 break;
             case "Wheel3":
                 currentCombination[2] = number;
