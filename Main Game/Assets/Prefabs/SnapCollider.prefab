@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3420668816270486855}
   m_Layer: 0
   m_Name: TopSnapCollider
-  m_TagString: TopSnapCollider
+  m_TagString: SnapCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57,3 +57,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9e455347a7add14f86c45c5eb233752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  permittedSnappables: []
