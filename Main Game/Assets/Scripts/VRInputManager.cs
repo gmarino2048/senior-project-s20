@@ -30,7 +30,20 @@ public class VRInputManager : MonoBehaviour {
 		return gripAction.GetStateDown(SteamVR_Input_Sources.Any);
 	}
 	public bool GetGrip(SteamVR_Input_Sources hand) {
-		return gripAction.GetStateDown(hand);
+		bool gripClick = false;
+
+		switch (hand) {
+			case SteamVR_Input_Sources.LeftHand:
+				gripClick = Input.GetKeyDown(KeyCode.LeftControl);
+				break;
+			case SteamVR_Input_Sources.RightHand:
+				gripClick = Input.GetKeyDown(KeyCode.RightControl);
+				break;
+			case SteamVR_Input_Sources.Any:
+				gripClick = Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl);
+				break;
+		}
+		return gripAction.GetStateDown(hand) || gripClick;
 	}
 	public bool GetMenu() {
 		return menuAction.GetStateDown(SteamVR_Input_Sources.Any);
