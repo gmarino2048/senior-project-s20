@@ -18,35 +18,9 @@ public class CogBoardController : MonoBehaviour
 		CheckCogOrder();
 	}*/
 
-	private void CheckCogOrder(int cogID, GameObject cog)
+	private void CheckCogOrder(string name, GameObject cog)
 	{
-		switch (name)
-		{
-			case "Cog1":
-				currentCombination[0] = number;
-				break;
-			case "Cog2":
-				currentCombination[1] = number;
-				break;
-			case "Cog3":
-				currentCombination[2] = number;
-				break;
-		}
 
-		bool unlocked = true;
-
-		for (int i = 0; i < correctCombination.Length; i++)
-		{
-			if (correctCombination[i] != currentCombination[i])
-			{
-				unlocked = false;
-			}
-		}
-
-		if (unlocked)
-		{
-			Debug.Log("Unlocked.");
-		}
 	}
 
 	/*private void CheckCogOrder()

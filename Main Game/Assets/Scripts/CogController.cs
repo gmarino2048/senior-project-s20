@@ -7,7 +7,7 @@ public class CogController : MonoBehaviour
 {
 	[SerializeField] private int cogID;
 
-	public static event Action<string, GameObject> Connected = delegate { };
+	public static event Action<String, GameObject> Connected = delegate { };
 
 	private void OnCollisionEnter(Collision collision)
 	{
