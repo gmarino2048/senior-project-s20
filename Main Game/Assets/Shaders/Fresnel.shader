@@ -7,16 +7,24 @@
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
 
         _Glossiness ("Smoothness", Range(0,1)) = 0.5
-        _Metallic ("Metallic", Range(0,1)) = 0.0
 
         _Emission ("Emission", Range(0,1)) = 0.5
         _EmissionColor ("Emission Color", Color) = (1,1,1,1)
-        _FresnelExponent ("Fresnel Exponent", Range(0,1)) = 0.5
+        _FresnelExponent ("Fresnel Exponent", Range(0,3)) = 0.5
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags 
+        { 
+            "RenderType"="Transparent"
+            "Queue"="Transparent"
+        }
+
         LOD 200
+        Lighting on
+        ZWrite off
+        Cull back
+        Blend SrcAlpha OneMinusSrcAlpha
 
         CGPROGRAM
         // Physically based Standard lighting model, and enable shadows on all light types
@@ -37,7 +45,6 @@
 
         fixed4 _Color;
         half _Glossiness;
-        half _Metallic;
         half _Emission;
         fixed4 _EmissionColor;
         half _FresnelExponent;
@@ -57,7 +64,6 @@
             o.Alpha = c.a;
 
             // Metallic and smoothness come from slider variables
-            o.Metallic = _Metallic;
             o.Smoothness = _Glossiness;
 
             float fresnel = dot(IN.worldNormal, IN.viewDir);
