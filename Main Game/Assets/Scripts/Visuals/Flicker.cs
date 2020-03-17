@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,28 +7,31 @@ namespace Visuals
 {
     public class Flicker : MonoBehaviour
     {
-        public int RandomSeed { get; set; }
-        public int NumberPrimes { get; set; }
-        public float FlickerSpeed { get; set; }
+        public int randomSeed { get; set; }
+        public int numberPrimes { get; set; }
+        public float flickerSpeed { get; set; }
 
-        private System.Random random;
+        private System.Random _random;
 
-        private List<Light> campfireLights;
-        private List<int> primes;
+        private List<Light> _campfireLights;
+        private List<int> _primes;
 
-        private List<float> nextFlicker;
+        private List<float> _nextFlicker;
 
 
         // Start is called before the first frame update
         void Start()
         {
-            random = new System.Random(RandomSeed);
+            _random = new System.Random(randomSeed);
 
-            campfireLights = new List<Light>(GetCampfireLights());
-            primes = new List<int>(GetPrimes(NumberPrimes));
+            _campfireLights = new List<Light>(GetCampfireLights());
+            _primes = new List<int>(GetPrimes(numberPrimes));
 
             // Select primes from the list for each light
-            var selectedPrimes = RandomSelect<int>(campfireLights.Count(), primes, random);
+            var selectedPrimes = RandomSelect<int>(
+                _campfireLights.Count() * 2,
+                _primes,
+                _random);
         }
 
         // Update is called once per frame
