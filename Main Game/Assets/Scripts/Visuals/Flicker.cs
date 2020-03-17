@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = System.Random;
+using Util = Valve.VR.InteractionSystem.Util;
 
 namespace Visuals
 {
@@ -10,34 +13,105 @@ namespace Visuals
         public int randomSeed { get; set; }
         public int numberPrimes { get; set; }
         public float flickerSpeed { get; set; }
+        public float maxFlickerDuration { get; set; }
 
         private System.Random _random;
 
         private List<Light> _campfireLights;
         private List<int> _primes;
+        private List<FlickerInterval> _intervals;
 
         private List<float> _nextFlicker;
 
+        struct FlickerInterval
+        {
+            public Light light { get; }
+            public float interval { get; }
+            public float counter { get; private set; }
+
+            private float _maxFlickerDuration;
+            private Random _random;
+
+            public FlickerInterval(Light light, float interval, float maxFlickerDuration, Random random = null)
+            {
+                this.light = light;
+                this.interval = interval;
+                counter = 0;
+
+                _maxFlickerDuration = maxFlickerDuration;
+                _random = random ?? new Random();
+            }
+
+            public IEnumerator Increment(float deltaTime)
+            {
+                counter += deltaTime;
+                if (counter > interval)
+                {
+                    yield return DoFlicker();
+                }
+            }
+
+            private IEnumerator DoFlicker()
+            {
+                var duration = _maxFlickerDuration * (float)_random.NextDouble();
+
+                var enabled = light.enabled;
+                light.enabled = false;
+                yield return new WaitForSeconds(duration);
+                
+                // Resharper is being stupid on this one, I promise
+                // ReSharper disable once Unity.InefficientPropertyAccess
+                light.enabled = enabled;
+            }
+        }
 
         // Start is called before the first frame update
         void Start()
         {
             _random = new System.Random(randomSeed);
-
             _campfireLights = new List<Light>(GetCampfireLights());
+
+            // Avoid light flicker overlapping
+            if (numberPrimes < _campfireLights.Count * 2)
+                numberPrimes = _campfireLights.Count * 2;
+            
             _primes = new List<int>(GetPrimes(numberPrimes));
 
             // Select primes from the list for each light
-            var selectedPrimes = RandomSelect<int>(
-                _campfireLights.Count() * 2,
-                _primes,
-                _random);
+            _intervals = new List<FlickerInterval>();
+            _campfireLights.ForEach(campfireLight =>
+            {
+                var interval = GetInterval(_primes, _random);
+                _intervals.Add(new FlickerInterval(
+                    campfireLight,
+                    interval,
+                    maxFlickerDuration,
+                    _random));
+            });
         }
 
         // Update is called once per frame
         void Update()
         {
+            foreach (var flickerInterval in _intervals)
+            {
+                StartCoroutine(flickerInterval.Increment(Time.deltaTime));
+            }
+        }
+        
+        // Get the interval for each light
+        private float GetInterval(List<int> primes, Random random = null)
+        {
+            random = random ?? new Random();
+            var selected = new SortedSet<int>(RandomSelect(2, primes, random));
+            
+            // List of primes should be unique so standard removal should work
+            foreach (var item in selected)
+            {
+                primes.Remove(item);
+            }
 
+            return selected.Max / (float) selected.Min;
         }
 
         // Fetch all the point lights in the object
@@ -93,16 +167,7 @@ namespace Visuals
             return true;
         }
 
-        // Check whether a float is within a given tolerance range
-        // More stable than a direct float comparison
-        private bool Within(float comp, float target, float tolerance)
-        {
-            var upper = target + tolerance;
-            var lower = target - tolerance;
-
-            return lower <= comp && comp <= upper;
-        }
-
+        // Select `count` elements randomly from list
         private IEnumerable<T> RandomSelect<T>(int count, IList<T> list, System.Random random = null)
         {
             var retVal = new List<T>(count);
