@@ -11,10 +11,10 @@ namespace Visuals
 {
     public class Flicker : MonoBehaviour
     {
-        public int randomSeed;
-        public int numberPrimes;
-        public float flickerSpeed;
-        public float maxFlickerDuration;
+        public int randomSeed = 2000;
+        public int numberPrimes = 20;
+        public float flickerSpeed = 1.0f;
+        public float maxFlickerDuration = 0.5f;
 
         private System.Random _random;
 
