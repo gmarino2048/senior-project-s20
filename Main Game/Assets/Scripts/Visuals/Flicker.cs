@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Transactions;
 using UnityEngine;
 using Random = System.Random;
 using Util = Valve.VR.InteractionSystem.Util;
@@ -31,6 +32,7 @@ namespace Visuals
 
             private readonly float _maxFlickerDuration;
             private readonly Random _random;
+            private const float rampTime = 0.05f;
 
             public FlickerInterval(Light light, float interval, float maxFlickerDuration, Random random = null)
             {
@@ -57,18 +59,56 @@ namespace Visuals
                 var duration = _maxFlickerDuration * (float)_random.NextDouble();
 
                 var currentIntensity = light.intensity;
-                light.intensity = currentIntensity / 2;
-                yield return new WaitForSeconds(duration);
+                var finalIntensity = currentIntensity  * 0.75f;
                 
-                // Resharper is being stupid on this one, I promise
-                // ReSharper disable once Unity.InefficientPropertyAccess
+                yield return RampDown(currentIntensity, finalIntensity);
+                yield return new WaitForSeconds(duration);
+                yield return RampUp(finalIntensity, currentIntensity);
+
+                // Need to set this so because the scene just keeps getting dimmer and dimmer
                 light.intensity = currentIntensity;
             }
-            
-            // TODO: Ramp down intensity rather than immediately cutting it in half
-            private IEnumerator RampIntensity()
+
+            private IEnumerator RampDown(float initialIntensity, float finalIntensity)
             {
-                yield return null;
+                if (initialIntensity < finalIntensity)
+                {
+                    yield return RampUp(initialIntensity, finalIntensity);
+                }
+                else
+                {
+                    var currentIntensity = initialIntensity;
+                    while (currentIntensity > finalIntensity)
+                    {
+                        var span = initialIntensity - finalIntensity;
+                        var decAmount = span * (Time.deltaTime / rampTime);
+
+                        light.intensity -= decAmount;
+                        currentIntensity -= decAmount;
+                        yield return new WaitForEndOfFrame();
+                    }
+                }
+            }
+
+            private IEnumerator RampUp(float initialIntensity, float finalIntensity)
+            {
+                if (initialIntensity > finalIntensity)
+                {
+                    yield return RampDown(initialIntensity, finalIntensity);
+                }
+                else
+                {
+                    var currentIntensity = initialIntensity;
+                    while (currentIntensity < finalIntensity)
+                    {
+                        var span = finalIntensity - currentIntensity;
+                        var incAmount = span * (Time.deltaTime / rampTime);
+
+                        light.intensity += incAmount;
+                        currentIntensity += incAmount;
+                        yield return new WaitForEndOfFrame();
+                    }
+                }
             }
         }
 
