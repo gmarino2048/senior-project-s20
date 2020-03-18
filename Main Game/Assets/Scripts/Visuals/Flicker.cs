@@ -10,10 +10,10 @@ namespace Visuals
 {
     public class Flicker : MonoBehaviour
     {
-        public int randomSeed { get; set; }
-        public int numberPrimes { get; set; }
-        public float flickerSpeed { get; set; }
-        public float maxFlickerDuration { get; set; }
+        public int randomSeed;
+        public int numberPrimes;
+        public float flickerSpeed;
+        public float maxFlickerDuration;
 
         private System.Random _random;
 
@@ -23,14 +23,14 @@ namespace Visuals
 
         private List<float> _nextFlicker;
 
-        struct FlickerInterval
+        class FlickerInterval
         {
             public Light light { get; }
             public float interval { get; }
-            public float counter { get; private set; }
+            public float counter { get; set; }
 
-            private float _maxFlickerDuration;
-            private Random _random;
+            private readonly float _maxFlickerDuration;
+            private readonly Random _random;
 
             public FlickerInterval(Light light, float interval, float maxFlickerDuration, Random random = null)
             {
@@ -47,6 +47,7 @@ namespace Visuals
                 counter += deltaTime;
                 if (counter > interval)
                 {
+                    counter = 0;
                     yield return DoFlicker();
                 }
             }
@@ -55,13 +56,19 @@ namespace Visuals
             {
                 var duration = _maxFlickerDuration * (float)_random.NextDouble();
 
-                var enabled = light.enabled;
-                light.enabled = false;
+                var currentIntensity = light.intensity;
+                light.intensity = currentIntensity / 2;
                 yield return new WaitForSeconds(duration);
                 
                 // Resharper is being stupid on this one, I promise
                 // ReSharper disable once Unity.InefficientPropertyAccess
-                light.enabled = enabled;
+                light.intensity = currentIntensity;
+            }
+            
+            // TODO: Ramp down intensity rather than immediately cutting it in half
+            private IEnumerator RampIntensity()
+            {
+                yield return null;
             }
         }
 
@@ -79,7 +86,7 @@ namespace Visuals
 
             // Select primes from the list for each light
             _intervals = new List<FlickerInterval>();
-            _campfireLights.ForEach(campfireLight =>
+            foreach (var campfireLight in _campfireLights)
             {
                 var interval = GetInterval(_primes, _random);
                 _intervals.Add(new FlickerInterval(
@@ -87,7 +94,7 @@ namespace Visuals
                     interval,
                     maxFlickerDuration,
                     _random));
-            });
+            }
         }
 
         // Update is called once per frame
@@ -95,7 +102,8 @@ namespace Visuals
         {
             foreach (var flickerInterval in _intervals)
             {
-                StartCoroutine(flickerInterval.Increment(Time.deltaTime));
+                
+                StartCoroutine(flickerInterval.Increment(Time.deltaTime * flickerSpeed));
             }
         }
         
@@ -175,8 +183,8 @@ namespace Visuals
 
             for (var i = 0; i < count; i++)
             {
-                int idx = random.Next(list.Count());
-                retVal[i] = list[idx];
+                var idx = random.Next(list.Count());
+                retVal.Add(list[idx]);
                 list.RemoveAt(idx);
             }
 
