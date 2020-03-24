@@ -3,10 +3,12 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PointClickButton : PointClickObject
+public class PointClickButton : InteractiveObject
 {
 	[SerializeField] private float pressTime;
 	[SerializeField] private float pressSpeed;
+	//How often the event fires while the button is being held down. If <= 0, it doesn't repeat
+	[SerializeField] private float eventTriggerRate;
 	[SerializeField] private bool moveOnX, moveOnY, moveOnZ;
 	private int xMove, yMove, zMove;
 
@@ -31,19 +33,20 @@ public class PointClickButton : PointClickObject
 			zMove = 1;
 	}
 
-	public override void Interact(HandController hand) {
+	public override void Interact(Transform handTF) {
 		if (!isPressing)
 			StartCoroutine(PressButton());
 	}
 
-	public override void Release(HandController hand) {
-		if (isPressing)
+	public override void Release() {
+		if (isPressing) {
+			StopAllCoroutines();
 			StartCoroutine(ReleaseButton());
+		}
 	}
 
 	private IEnumerator PressButton() {
 		float timer = 0;
-		pressEvent.Invoke();
 		isPressing = true;
 
 		while (timer < pressTime) {
@@ -51,6 +54,15 @@ public class PointClickButton : PointClickObject
 			float distance = -pressSpeed * Time.deltaTime;
 			transform.Translate(new Vector3(distance * xMove, distance * yMove, distance * zMove));
 			yield return new WaitForEndOfFrame();
+		}
+
+		pressEvent.Invoke();
+
+		if (eventTriggerRate > 0) {
+			while (true) {
+				pressEvent.Invoke();
+				yield return new WaitForSeconds(eventTriggerRate);
+			}
 		}
 	}
 

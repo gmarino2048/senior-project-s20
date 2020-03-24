@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 
-//Used for any object that the user can point at and interact with
+//Used for any object that the user interacts with
 [RequireComponent(typeof(Collider))]
-public abstract class PointClickObject : MonoBehaviour {
+public abstract class InteractiveObject : MonoBehaviour {
 	private Vector3 originalScale;
 	[SerializeField] private float scaleAmount = 1.01f;
+
+	//If this is true, then interaction behavior will be held over multiple frames. False for things where the player clicks & they run Interact once
+	public bool InteractionIsHeld;
 
 	protected virtual void Start() {
 		originalScale = transform.localScale;
@@ -24,8 +27,8 @@ public abstract class PointClickObject : MonoBehaviour {
 	}
 
 	//Called when the player clicks on the object
-	public abstract void Interact(HandController hand);
+	public abstract void Interact(Transform handTF);
 
 	//Called when the player releases the click
-	public virtual void Release(HandController hand) { }
+	public virtual void Release() { }
 }

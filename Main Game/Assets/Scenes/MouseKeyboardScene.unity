@@ -386,7 +386,7 @@ GameObject:
   - component: {fileID: 441524811}
   m_Layer: 0
   m_Name: Button
-  m_TagString: Interactive
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -417,9 +417,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bce843a3500c34499572efa925509f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleAmount: 1.01
+  scaleAmount: 1.05
+  InteractionIsHeld: 1
   pressTime: 0.15
   pressSpeed: 0.1
+  eventTriggerRate: 0.5
+  moveOnX: 0
+  moveOnY: 1
+  moveOnZ: 0
   pressEvent:
     m_PersistentCalls:
       m_Calls:
@@ -620,9 +625,10 @@ GameObject:
   - component: {fileID: 761927946}
   - component: {fileID: 761927945}
   - component: {fileID: 761927949}
+  - component: {fileID: 761927950}
   m_Layer: 0
   m_Name: Fun Ball
-  m_TagString: Interactive
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -716,6 +722,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &761927950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761927944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93f8e022c2e07ac42ad505343d394bfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleAmount: 1.15
+  InteractionIsHeld: 0
 --- !u!1 &783947839
 GameObject:
   m_ObjectHideFlags: 0
@@ -917,7 +937,7 @@ GameObject:
   - component: {fileID: 1004357722}
   m_Layer: 0
   m_Name: Button
-  m_TagString: Interactive
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1008,7 +1028,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15849a93dd262c441a4129a89dea68a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleAmount: 1.01
+  scaleAmount: 1.05
+  InteractionIsHeld: 0
   ball: {fileID: 761927944}
   spawnPoint: {fileID: 1936572784}
   pressTime: 0.15
@@ -1187,6 +1208,11 @@ PrefabInstance:
     - target: {fileID: 75122920693526348, guid: 78e729cce38bd704980d28f04c0f17e1,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4238094914964667563, guid: 78e729cce38bd704980d28f04c0f17e1,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

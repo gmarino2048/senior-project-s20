@@ -43,6 +43,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7beabe1472ed578ebbeea0cb5570cf32, type: 2}
+    - target: {fileID: -6054058774237248251, guid: f04c36a107cdd02d680553205b4dfc8e,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: f04c36a107cdd02d680553205b4dfc8e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -102,6 +107,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 'Mag glass w pad '
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711277887553122256, guid: f04c36a107cdd02d680553205b4dfc8e,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4063835366044962077, guid: f04c36a107cdd02d680553205b4dfc8e,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f04c36a107cdd02d680553205b4dfc8e, type: 3}
