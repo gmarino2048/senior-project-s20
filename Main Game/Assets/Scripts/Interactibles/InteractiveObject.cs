@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Valve.VR;
 
 //Used for any object that the user interacts with
 [RequireComponent(typeof(Collider))]
