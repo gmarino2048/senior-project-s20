@@ -26,7 +26,7 @@ public class Rotate : MonoBehaviour
 		wheelIsSpinning = true;
 
 		for (int i = 0; i < 15; i++){
-			transform.Rotate(0f, -3f, 0f);
+			transform.Rotate(0f, 0f, -3f);
 			yield return new WaitForSeconds(0.01f);
 		}
 
