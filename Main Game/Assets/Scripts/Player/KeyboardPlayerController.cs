@@ -9,20 +9,21 @@ public class KeyboardPlayerController : MonoBehaviour {
 	public float accel;
 	public float raycastRange;
 
-	private Rigidbody rb;
-
 	private Transform camTF;
 	private float camXRotation; //Used to keep the camera from flipping over vertically
 	public float mouseSensitivity;
-	private bool lockCam;
+	[SerializeField] private GameObject reticle;
 
+	private Rigidbody rb;
 	private MagnifyingGlassManager magnifyingGlass;
 
 	[SerializeField]
-	private Transform leftHandTF, rightHandTF;
-	private InteractiveObject leftHeldObject, rightHeldObject;
+	private Transform handTF;
+	private InteractiveObject heldObject;
 	//The transform in the center of the screen where held objects are placed
 	public Transform objectDropPoint;
+
+	private bool movementLocked = false;
 
 	void Start() {
 		rb = GetComponent<Rigidbody>();
@@ -35,66 +36,76 @@ public class KeyboardPlayerController : MonoBehaviour {
 
 	//Only used for camera movement
 	private void Update() {
-		CamMovement();
-		InteractiveObject target = CheckRaycast();
-		HandHandler(target);
+		if (!movementLocked) {
+			CamMovement();
+			GameObject target = CheckRaycast();
+			HandHandler(target);
 
-		//Bound to 'q' since it's convenient and shaped the most like a magnifying glass
-		if (Input.GetKeyDown(KeyCode.Q)) {
-			magnifyingGlass.Toggle();
-		}
-	}
-
-	private void HandHandler(InteractiveObject target) {
-		if (Input.GetMouseButtonDown(0)) {
-			if (target != null && leftHeldObject == null) {
-				target.Interact(leftHandTF);
-				if (target.InteractionIsHeld)
-					leftHeldObject = target;
-			}
-			else if(leftHeldObject != null) {
-				leftHeldObject.Release();
-				leftHeldObject = null;
-			}
-		}
-		else if (Input.GetMouseButtonDown(1)) {
-			if (target != null && rightHeldObject == null) {
-				target.Interact(rightHandTF);
-				if (target.InteractionIsHeld)
-					rightHeldObject = target;
-			}
-			else if(rightHeldObject != null) {
-				rightHeldObject.Release();
-				rightHeldObject = null;
+			//Bound to 'q' since it's convenient and shaped the most like a magnifying glass
+			if (Input.GetKeyDown(KeyCode.Q)) {
+				magnifyingGlass.Toggle();
 			}
 		}
 	}
 
 	private void FixedUpdate() {
-		WalkMovement();
+		if (!movementLocked) {
+			WalkMovement();
+		}
+	}
+
+	private void HandHandler(GameObject target) {
+		//First get the possible interactable components out
+		InteractiveObject targetInteractive = null;
+		ObjectPlacementVolume targetPlacement = null;
+		if(target != null) {
+			targetInteractive = target.GetComponent<InteractiveObject>();
+			targetPlacement = target.GetComponent<ObjectPlacementVolume>();
+			if (targetInteractive != null)
+				targetInteractive.Highlight();
+		}
+
+		//Click behaviors
+		if (Input.GetMouseButtonDown(0)) {
+			if (targetInteractive != null && heldObject == null) {
+				targetInteractive.Interact(handTF);
+				if (targetInteractive.InteractionIsHeld)
+					heldObject = targetInteractive;
+			}
+			else if(heldObject != null) {
+				if (targetPlacement != null) {
+					if (targetPlacement.requiredObject = heldObject.gameObject) {
+						heldObject.ReleaseTo(targetPlacement.transform);
+						heldObject = null;
+						targetPlacement.PlacementTrigger();
+						return;
+					}
+				}
+				heldObject.Release();
+				heldObject = null;
+			}
+		}
 	}
 
 	private void CamMovement() {
-		if (!lockCam) {
-			transform.Rotate(new Vector3(0, Input.GetAxis("Mouse X") * mouseSensitivity, 0));
-			float mouseY = -Input.GetAxis("Mouse Y");
-			if (camXRotation < 90 && camXRotation > -90) //camXRotation keeps track of how far it has rotated on the X axis
-			{                                           //If it hits 90 or -90 it won't let you move any farther that way
-				camXRotation += mouseY * mouseSensitivity;
-				camTF.Rotate(new Vector3(mouseY * mouseSensitivity, 0, 0));
-			}
-			else if (camXRotation > 90 && mouseY < 0) {
-				camXRotation += mouseY * mouseSensitivity;
-				camTF.Rotate(new Vector3(mouseY * mouseSensitivity, 0, 0));
-			}
-			else if (camXRotation < -90 && mouseY > 0) {
-				camXRotation += mouseY * mouseSensitivity;
-				camTF.Rotate(new Vector3(mouseY * mouseSensitivity, 0, 0));
-			}
-
-			Cursor.lockState = CursorLockMode.Locked;
-			Cursor.visible = false;
+		transform.Rotate(new Vector3(0, Input.GetAxis("Mouse X") * mouseSensitivity, 0));
+		float mouseY = -Input.GetAxis("Mouse Y");
+		if (camXRotation < 90 && camXRotation > -90) //camXRotation keeps track of how far it has rotated on the X axis
+		{                                           //If it hits 90 or -90 it won't let you move any farther that way
+			camXRotation += mouseY * mouseSensitivity;
+			camTF.Rotate(new Vector3(mouseY * mouseSensitivity, 0, 0));
 		}
+		else if (camXRotation > 90 && mouseY < 0) {
+			camXRotation += mouseY * mouseSensitivity;
+			camTF.Rotate(new Vector3(mouseY * mouseSensitivity, 0, 0));
+		}
+		else if (camXRotation < -90 && mouseY > 0) {
+			camXRotation += mouseY * mouseSensitivity;
+			camTF.Rotate(new Vector3(mouseY * mouseSensitivity, 0, 0));
+		}
+
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
 	}
 
 	private void WalkMovement() {
@@ -111,24 +122,33 @@ public class KeyboardPlayerController : MonoBehaviour {
 	}
 
 	//Raycasts forwards to find objects
-	private InteractiveObject CheckRaycast() {
+	private GameObject CheckRaycast() {
 		RaycastHit hit;
-		InteractiveObject target;
+		GameObject target;
 		if (Physics.Raycast(camTF.position, camTF.TransformDirection(Vector3.forward), out hit, raycastRange)) {
-			target = hit.collider.gameObject.GetComponent<InteractiveObject>();
+			target = hit.collider.gameObject;
 			if (target != null) {
-				target.Highlight();
 				return target;
 			}
 		}
 		return null;
 	}
 
-	public void SetCamLockState(bool locked) {
-		lockCam = locked;
-		if (locked) {
-			Cursor.visible = true;
+	public void SetPlayerMovementLock(bool lockPlayer) {
+		movementLocked = lockPlayer;
+		Cursor.visible = lockPlayer;
+		if (lockPlayer) {
 			Cursor.lockState = CursorLockMode.None;
+			reticle.SetActive(false);
 		}
+		else {
+			Cursor.lockState = CursorLockMode.Locked;
+			reticle.SetActive(true);
+		}
+	}
+	
+	public void SetCameraState(bool enablePlayerCamera) {
+		camTF.GetComponent<Camera>().enabled = enablePlayerCamera;
+		camTF.GetComponent<AudioListener>().enabled = enablePlayerCamera;
 	}
 }
