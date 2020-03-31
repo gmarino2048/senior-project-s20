@@ -138,6 +138,7 @@ public class KeyboardPlayerController : MonoBehaviour {
 		movementLocked = lockPlayer;
 		Cursor.visible = lockPlayer;
 		if (lockPlayer) {
+			rb.velocity = Vector3.zero;
 			Cursor.lockState = CursorLockMode.None;
 			reticle.SetActive(false);
 		}

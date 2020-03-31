@@ -34,7 +34,7 @@ public class PuzzleFocusManager : InteractiveObject {
 		}
 	}
 
-	public void ToggleState(bool enable) {
+	public virtual void ToggleState(bool enable) {
 		player.SetPlayerMovementLock(enable);
 		player.SetCameraState(!enable);
 		triggerVolume.enabled = !enable;
