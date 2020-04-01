@@ -291,7 +291,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &75122919380891374
 Transform:
   m_ObjectHideFlags: 0
@@ -570,8 +570,8 @@ MonoBehaviour:
   accel: 2
   raycastRange: 2.5
   mouseSensitivity: 4.5
-  leftHandTF: {fileID: 75122919380891374}
-  rightHandTF: {fileID: 75122920198844233}
+  reticle: {fileID: 0}
+  handTF: {fileID: 75122920198844233}
   objectDropPoint: {fileID: 8951000465996677935}
 --- !u!1 &75122920551278610
 GameObject:
@@ -766,7 +766,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 75122920693526348}
-  - component: {fileID: 75122920693526349}
   m_Layer: 0
   m_Name: PlayerRig
   m_TagString: Untagged
@@ -790,39 +789,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &75122920693526349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 75122920693526339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a848e280b29dba4a968c8b0e2aecee6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerAction:
-    actionPath: /actions/default/in/GrabPinch
-    needsReinit: 0
-  gripAction:
-    actionPath: /actions/default/in/GrabGrip
-    needsReinit: 0
-  menuAction:
-    actionPath: /actions/default/in/PressMenu
-    needsReinit: 0
-  leftClickAction:
-    actionPath: /actions/default/in/ClickLeft
-    needsReinit: 0
-  rightClickAction:
-    actionPath: /actions/default/in/ClickRight
-    needsReinit: 0
-  upClickAction:
-    actionPath: /actions/default/in/ClickUp
-    needsReinit: 0
-  downClickAction:
-    actionPath: /actions/default/in/ClickDown
-    needsReinit: 0
 --- !u!1 &761090947549932844
 GameObject:
   m_ObjectHideFlags: 0

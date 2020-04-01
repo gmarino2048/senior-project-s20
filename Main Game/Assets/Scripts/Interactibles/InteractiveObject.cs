@@ -30,4 +30,10 @@ public abstract class InteractiveObject : MonoBehaviour {
 
 	//Called when the player releases the click
 	public virtual void Release() { }
+
+	public virtual void ReleaseTo(Transform placementPosition) {
+		transform.parent = placementPosition;
+		transform.localPosition = Vector3.zero;
+		transform.localRotation = Quaternion.identity;
+	}
 }
