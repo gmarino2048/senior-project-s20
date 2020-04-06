@@ -2,10 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Transactions;
 using UnityEngine;
 using Random = System.Random;
-using Util = Valve.VR.InteractionSystem.Util;
 
 namespace Visuals
 {
