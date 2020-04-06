@@ -6,5 +6,5 @@ using UnityEngine;
 public abstract class ObjectPlacementVolume : MonoBehaviour {
 	public GameObject requiredObject;
 
-	public abstract void PlacementTrigger();
+	public abstract void PlacementTrigger(InteractiveObject gameObject);
 }
