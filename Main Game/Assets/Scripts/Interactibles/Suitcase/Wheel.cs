@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Rotate : MonoBehaviour
+public class Wheel : MonoBehaviour
 {
 	public static event Action<string, int> Rotated = delegate{};
 

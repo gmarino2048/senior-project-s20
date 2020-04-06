@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class CombinationLockController : MonoBehaviour
 {
-    [SerializeField]
     public int[] correctCombination = new int[5];
     public int[] currentCombination = new int[5];
 	public GameObject suitCaseTop;
     // Start is called before the first frame update
     void Start()
     {
-        Rotate.Rotated += CheckCombination;
+        Wheel.Rotated += CheckCombination;
     }
 
     private void CheckCombination(string wheel, int number){
@@ -33,22 +32,18 @@ public class CombinationLockController : MonoBehaviour
                 break;
         }
 
-        bool unlocked = true;
-
         for (int i = 0; i < correctCombination.Length; i++)
 		{
 			if (correctCombination[i] != currentCombination[i]){
-                unlocked = false;
+                return; // Immediately return since the combination is wrong and the suitcase should not be unlocked.
             }
 		}
 
-		if (unlocked){
-			StartCoroutine("Unlock");
-        }
+		StartCoroutine(Unlock());
     }
 
     private void OnDestroy() {
-        Rotate.Rotated -= CheckCombination;
+        Wheel.Rotated -= CheckCombination;
     }
 
 	private IEnumerator Unlock()
