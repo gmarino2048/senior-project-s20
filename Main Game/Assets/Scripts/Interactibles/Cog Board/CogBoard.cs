@@ -15,6 +15,11 @@ public class CogBoard : MonoBehaviour
 		CogPlacement.CogPlaced += checkCogs;
     }
 
+	private void OnDestroy()
+	{
+		CogPlacement.CogPlaced -= checkCogs;
+	}
+
 	private void checkCogs(string cogPlacement, bool correctPlacement)
 	{
 		switch (cogPlacement)
