@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Main Game/Assets/Scripts/Interactibles/ObjectPlacementVolume.cs.meta
 guid: 413c5cc3909dfbb48a576aa3793d887d
+=======
+guid: a6a6cffc84a7afd469701343ffe442a1
+>>>>>>> master:Main Game/Assets/Scripts/Interactibles/DemoObjectPlacement.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

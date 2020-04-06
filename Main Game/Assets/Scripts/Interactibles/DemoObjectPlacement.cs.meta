@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Main Game/Assets/Scripts/Interactibles/DemoObjectPlacement.cs.meta
 guid: a6a6cffc84a7afd469701343ffe442a1
+=======
+guid: 58eb6ae6b9683e94c9b5d6f056694d68
+>>>>>>> master:Main Game/Assets/Scripts/Interactibles/Game Boy/GBButton.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
