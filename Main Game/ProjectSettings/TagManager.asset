@@ -6,7 +6,6 @@ TagManager:
   tags:
   - projectile
   - FxTemporaire
-  - Interactive
   - SnapCollider
   - SnappableObject
   - TopSnapCollider

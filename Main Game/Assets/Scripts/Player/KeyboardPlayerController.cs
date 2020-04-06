@@ -3,20 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+//Now this is the only type of playercontroller :(
 public class KeyboardPlayerController : MonoBehaviour {
 	public float speed;
 	public float accel;
-
-	private Rigidbody rb;
+	public float raycastRange;
 
 	private Transform camTF;
 	private float camXRotation; //Used to keep the camera from flipping over vertically
 	public float mouseSensitivity;
-	private bool lockCam;
+	[SerializeField] private GameObject reticle;
+
+	private Rigidbody rb;
+	private MagnifyingGlassManager magnifyingGlass;
+
+	[SerializeField]
+	private Transform handTF;
+	private InteractiveObject heldObject;
+	//The transform in the center of the screen where held objects are placed
+	public Transform objectDropPoint;
+
+	private bool movementLocked = false;
 
 	void Start() {
 		rb = GetComponent<Rigidbody>();
 		camTF = Camera.main.transform;
+		magnifyingGlass = GetComponentInChildren<MagnifyingGlassManager>();
 
 		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
@@ -24,36 +36,79 @@ public class KeyboardPlayerController : MonoBehaviour {
 
 	//Only used for camera movement
 	private void Update() {
-		if (!lockCam) {
-			transform.Rotate(new Vector3(0, Input.GetAxis("Mouse X") * mouseSensitivity, 0));
-			float mouseY = -Input.GetAxis("Mouse Y");
-			if (camXRotation < 90 && camXRotation > -90) //camXRotation keeps track of how far it has rotated on the X axis
-			{                                           //If it hits 90 or -90 it won't let you move any farther that way
-				camXRotation += mouseY * mouseSensitivity;
-				camTF.Rotate(new Vector3(mouseY * mouseSensitivity, 0, 0));
-			}
-			else if (camXRotation > 90 && mouseY < 0) {
-				camXRotation += mouseY * mouseSensitivity;
-				camTF.Rotate(new Vector3(mouseY * mouseSensitivity, 0, 0));
-			}
-			else if (camXRotation < -90 && mouseY > 0) {
-				camXRotation += mouseY * mouseSensitivity;
-				camTF.Rotate(new Vector3(mouseY * mouseSensitivity, 0, 0));
-			}
+		if (!movementLocked) {
+			CamMovement();
+			GameObject target = CheckRaycast();
+			HandHandler(target);
 
-			Cursor.lockState = CursorLockMode.Locked;
-			Cursor.visible = false;
-		}
-	}
-	public void SetCamLockState(bool locked) {
-		lockCam = locked;
-		if (locked) {
-			Cursor.visible = true;
-			Cursor.lockState = CursorLockMode.None;
+			//Bound to 'q' since it's convenient and shaped the most like a magnifying glass
+			if (Input.GetKeyDown(KeyCode.Q)) {
+				magnifyingGlass.Toggle();
+			}
 		}
 	}
 
 	private void FixedUpdate() {
+		if (!movementLocked) {
+			WalkMovement();
+		}
+	}
+
+	private void HandHandler(GameObject target) {
+		//First get the possible interactable components out
+		InteractiveObject targetInteractive = null;
+		ObjectPlacementVolume targetPlacement = null;
+		if(target != null) {
+			targetInteractive = target.GetComponent<InteractiveObject>();
+			targetPlacement = target.GetComponent<ObjectPlacementVolume>();
+			if (targetInteractive != null)
+				targetInteractive.Highlight();
+		}
+
+		//Click behaviors
+		if (Input.GetMouseButtonDown(0)) {
+			if (targetInteractive != null && heldObject == null) {
+				targetInteractive.Interact(handTF);
+				if (targetInteractive.InteractionIsHeld)
+					heldObject = targetInteractive;
+			}
+			else if(heldObject != null) {
+				if (targetPlacement != null) {
+					if (targetPlacement.requiredObject = heldObject.gameObject) {
+						heldObject.ReleaseTo(targetPlacement.transform);
+						heldObject = null;
+						targetPlacement.PlacementTrigger();
+						return;
+					}
+				}
+				heldObject.Release();
+				heldObject = null;
+			}
+		}
+	}
+
+	private void CamMovement() {
+		transform.Rotate(new Vector3(0, Input.GetAxis("Mouse X") * mouseSensitivity, 0));
+		float mouseY = -Input.GetAxis("Mouse Y");
+		if (camXRotation < 90 && camXRotation > -90) //camXRotation keeps track of how far it has rotated on the X axis
+		{                                           //If it hits 90 or -90 it won't let you move any farther that way
+			camXRotation += mouseY * mouseSensitivity;
+			camTF.Rotate(new Vector3(mouseY * mouseSensitivity, 0, 0));
+		}
+		else if (camXRotation > 90 && mouseY < 0) {
+			camXRotation += mouseY * mouseSensitivity;
+			camTF.Rotate(new Vector3(mouseY * mouseSensitivity, 0, 0));
+		}
+		else if (camXRotation < -90 && mouseY > 0) {
+			camXRotation += mouseY * mouseSensitivity;
+			camTF.Rotate(new Vector3(mouseY * mouseSensitivity, 0, 0));
+		}
+
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
+	}
+
+	private void WalkMovement() {
 		Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 		targetVelocity = transform.TransformDirection(targetVelocity);
 		targetVelocity *= speed;
@@ -64,5 +119,37 @@ public class KeyboardPlayerController : MonoBehaviour {
 		velocityChange.y = 0;
 		velocityChange.z = Mathf.Clamp(velocityChange.z, -accel, accel); //Clamps it at normal acceleration
 		rb.AddForce(velocityChange, ForceMode.VelocityChange);
+	}
+
+	//Raycasts forwards to find objects
+	private GameObject CheckRaycast() {
+		RaycastHit hit;
+		GameObject target;
+		if (Physics.Raycast(camTF.position, camTF.TransformDirection(Vector3.forward), out hit, raycastRange)) {
+			target = hit.collider.gameObject;
+			if (target != null) {
+				return target;
+			}
+		}
+		return null;
+	}
+
+	public void SetPlayerMovementLock(bool lockPlayer) {
+		movementLocked = lockPlayer;
+		Cursor.visible = lockPlayer;
+		if (lockPlayer) {
+			rb.velocity = Vector3.zero;
+			Cursor.lockState = CursorLockMode.None;
+			reticle.SetActive(false);
+		}
+		else {
+			Cursor.lockState = CursorLockMode.Locked;
+			reticle.SetActive(true);
+		}
+	}
+	
+	public void SetCameraState(bool enablePlayerCamera) {
+		camTF.GetComponent<Camera>().enabled = enablePlayerCamera;
+		camTF.GetComponent<AudioListener>().enabled = enablePlayerCamera;
 	}
 }

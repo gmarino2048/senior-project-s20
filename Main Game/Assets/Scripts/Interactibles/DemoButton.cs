@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DemoButton : PointClickObject {
+public class DemoButton : InteractiveObject {
 	[SerializeField] private GameObject ball;
 	[SerializeField] private Transform spawnPoint;
 	[SerializeField] private float pressTime;
 	[SerializeField] private float pressSpeed;
 	private bool isPressing;
 
-	public override void Interact(HandController hand) {
+	public override void Interact(Transform handTF) {
 		if (!isPressing)
 			StartCoroutine(PressButton());
 	}
