@@ -31,7 +31,6 @@ public class CombinationLockController : MonoBehaviour
                 currentCombination[4] = number;
                 break;
         }
-
         for (int i = 0; i < correctCombination.Length; i++)
 		{
 			if (correctCombination[i] != currentCombination[i]){
