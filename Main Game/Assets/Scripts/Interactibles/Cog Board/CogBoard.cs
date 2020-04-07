@@ -20,17 +20,17 @@ public class CogBoard : MonoBehaviour
 		CogPlacement.CogPlaced -= checkCogs;
 	}
 
-	private void checkCogs(string cogPlacement, bool correctPlacement)
+	private void checkCogs(int slot, bool correctPlacement)
 	{
-		switch (cogPlacement)
+		switch (slot)
 		{
-			case "placement1":
+			case 1:
 				cog1 = correctPlacement;
 				break;
-			case "placement2":
+			case 2:
 				cog2 = correctPlacement;
 				break;
-			case "placement3":
+			case 3:
 				cog3 = correctPlacement;
 				break;
 		}
