@@ -11,9 +11,9 @@ public class CogBoard : MonoBehaviour
 
 	// Start is called before the first frame update
 	void Start()
-    {
+	{
 		CogPlacement.CogPlaced += checkCogs;
-    }
+	}
 
 	private void OnDestroy()
 	{
