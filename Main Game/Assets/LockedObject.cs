@@ -6,12 +6,12 @@ public class LockedObject : InteractiveObject
 {
 	[SerializeField]
 	private bool locked;
-    // Start is called before the first frame update
-    protected override void Start()
-    {
+	// Start is called before the first frame update
+	protected override void Start()
+	{
 		base.Start();
 		KeyObject.Unlocked += checkUnlocked;
-    }
+	}
 
 	private void checkUnlocked(bool unlocked, GameObject lockedObject)
 	{
