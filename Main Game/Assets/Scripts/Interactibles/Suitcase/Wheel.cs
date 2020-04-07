@@ -5,7 +5,7 @@ using System;
 
 public class Wheel : MonoBehaviour
 {
-	public static event Action<string, int> Rotated = delegate{};
+	public static event Action<int, int> Rotated = delegate{};
 
 	private bool wheelIsSpinning;
 	private int currentNumber;
@@ -17,8 +17,9 @@ public class Wheel : MonoBehaviour
 	}
 
 	private void OnMouseDown(){
+		Debug.Log("Clicking");
 		if(!wheelIsSpinning){
-			StartCoroutine("RotateWheel");
+			StartCoroutine(RotateWheel());
 		}
 	}
 
@@ -37,6 +38,8 @@ public class Wheel : MonoBehaviour
 			currentNumber = 0;
 		}
 
-		Rotated(name, currentNumber);
+		int wheel = int.Parse(name.Substring(name.Length - 1));
+
+		Rotated(wheel, currentNumber);
 	}
 }

@@ -13,24 +13,11 @@ public class CombinationLockController : MonoBehaviour
 		Wheel.Rotated += CheckCombination;
 	}
 
-	private void CheckCombination(string wheel, int number){
-		switch(wheel){
-			case "Wheel1":
-				currentCombination[0] = number;
-				break;
-			case "Wheel2":
-				currentCombination[1] = number;
-				break;
-			case "Wheel3":
-				currentCombination[2] = number;
-				break;
-			case "Wheel4":
-				currentCombination[3] = number;
-				break;
-			case "Wheel5":
-				currentCombination[4] = number;
-				break;
-		}
+	private void CheckCombination(int wheel, int number){
+		Debug.Log("Checking Combination");
+
+		currentCombination[wheel - 1] = number;
+
 		for (int i = 0; i < correctCombination.Length; i++)
 		{
 			if (correctCombination[i] != currentCombination[i]){
