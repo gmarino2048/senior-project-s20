@@ -4,52 +4,33 @@ using UnityEngine;
 
 public class CombinationLockController : MonoBehaviour
 {
-    [SerializeField]
-    public int[] correctCombination = new int[5];
-    public int[] currentCombination = new int[5];
+	public int[] correctCombination = new int[5];
+	public int[] currentCombination = new int[5];
 	public GameObject suitCaseTop;
-    // Start is called before the first frame update
-    void Start()
-    {
-        Rotate.Rotated += CheckCombination;
-    }
+	// Start is called before the first frame update
+	void Start()
+	{
+		Wheel.Rotated += CheckCombination;
+	}
 
-    private void CheckCombination(string wheel, int number){
-        switch(wheel){
-            case "Wheel1":
-                currentCombination[0] = number;
-                break;
-            case "Wheel2":
-				currentCombination[1] = number;
-                break;
-            case "Wheel3":
-                currentCombination[2] = number;
-                break;
-            case "Wheel4":
-                currentCombination[3] = number;
-                break;
-            case "Wheel5":
-                currentCombination[4] = number;
-                break;
-        }
+	private void CheckCombination(int wheel, int number){
+		Debug.Log("Checking Combination");
 
-        bool unlocked = true;
+		currentCombination[wheel - 1] = number;
 
-        for (int i = 0; i < correctCombination.Length; i++)
+		for (int i = 0; i < correctCombination.Length; i++)
 		{
 			if (correctCombination[i] != currentCombination[i]){
-                unlocked = false;
-            }
+				return; // Immediately return since the combination is wrong and the suitcase should not be unlocked.
+			}
 		}
 
-		if (unlocked){
-			StartCoroutine("Unlock");
-        }
-    }
+		StartCoroutine(Unlock());
+	}
 
-    private void OnDestroy() {
-        Rotate.Rotated -= CheckCombination;
-    }
+	private void OnDestroy() {
+		Wheel.Rotated -= CheckCombination;
+	}			
 
 	private IEnumerator Unlock()
 	{
