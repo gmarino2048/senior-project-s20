@@ -4,46 +4,46 @@ using UnityEngine;
 
 public class CombinationLockController : MonoBehaviour
 {
-    public int[] correctCombination = new int[5];
-    public int[] currentCombination = new int[5];
+	public int[] correctCombination = new int[5];
+	public int[] currentCombination = new int[5];
 	public GameObject suitCaseTop;
-    // Start is called before the first frame update
-    void Start()
-    {
-        Wheel.Rotated += CheckCombination;
-    }
+	// Start is called before the first frame update
+	void Start()
+	{
+		Wheel.Rotated += CheckCombination;
+	}
 
-    private void CheckCombination(string wheel, int number){
-        switch(wheel){
-            case "Wheel1":
-                currentCombination[0] = number;
-                break;
-            case "Wheel2":
+	private void CheckCombination(string wheel, int number){
+		switch(wheel){
+			case "Wheel1":
+				currentCombination[0] = number;
+				break;
+			case "Wheel2":
 				currentCombination[1] = number;
-                break;
-            case "Wheel3":
-                currentCombination[2] = number;
-                break;
-            case "Wheel4":
-                currentCombination[3] = number;
-                break;
-            case "Wheel5":
-                currentCombination[4] = number;
-                break;
-        }
-        for (int i = 0; i < correctCombination.Length; i++)
+				break;
+			case "Wheel3":
+				currentCombination[2] = number;
+				break;
+			case "Wheel4":
+				currentCombination[3] = number;
+				break;
+			case "Wheel5":
+				currentCombination[4] = number;
+				break;
+		}
+		for (int i = 0; i < correctCombination.Length; i++)
 		{
 			if (correctCombination[i] != currentCombination[i]){
-                return; // Immediately return since the combination is wrong and the suitcase should not be unlocked.
-            }
+				return; // Immediately return since the combination is wrong and the suitcase should not be unlocked.
+			}
 		}
 
 		StartCoroutine(Unlock());
-    }
+	}
 
-    private void OnDestroy() {
-        Wheel.Rotated -= CheckCombination;
-    }
+	private void OnDestroy() {
+		Wheel.Rotated -= CheckCombination;
+	}			
 
 	private IEnumerator Unlock()
 	{
