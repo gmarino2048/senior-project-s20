@@ -74,13 +74,18 @@ Material:
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _Speed: 0.385
+    - _Speed: 0.1
     - _SrcBlend: 1
-    - _Steepness: 0.284
+    - _Steepness: 0.247
     - _UVSec: 0
-    - _Wavelength: 7
+    - _Wavelength: 5
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0, g: 0.22604364, b: 0.3207547, a: 1}
+    - _Color: {r: 0, g: 0.46634743, b: 0.6509434, a: 1}
+    - _Direction: {r: 1, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Wave: {r: 0.5, g: 10, b: 1, a: 0}
     - _WaveFrequency: {r: 0.05, g: 0.05, b: 0, a: 0}
+    - _Wave_0: {r: 1, g: 0, b: 0.1, a: 3.8}
+    - _Wave_1: {r: 0, g: 1, b: 0.05, a: 5}
+    - _Wave_2: {r: 1, g: 1, b: 0.02, a: 5}
