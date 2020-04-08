@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PotionItem : HoldableObject {
-	[SerializeField] private PotionType effectType;
+	[SerializeField] protected PotionType effectType;
 	[SerializeField] private Vector3 throwVector;
-	[SerializeField] private float splashRadius;
+	[SerializeField] private float throwTorque;
+	[SerializeField] protected float splashRadius;
 
-	private ParticleSystem particles;
-	private Rigidbody rb;
+	protected ParticleSystem particles;
+	protected Rigidbody rb;
 
-	private bool hasBeenThrown;
+	protected bool hasBeenThrown;
 
 	protected override void Start() {
 		base.Start();
@@ -22,9 +23,11 @@ public class PotionItem : HoldableObject {
 		base.Release();
 		hasBeenThrown = true;
 		rb.AddRelativeForce(throwVector);
+		//Tried very hard to make it spin faster but increasing torque any amount beyond ~6 doesn't seem to do anything
+		rb.AddRelativeTorque(new Vector3(throwTorque, 0), ForceMode.VelocityChange);
 	}
 
-	void OnCollisionEnter(Collision other) {
+	protected virtual void OnCollisionEnter(Collision other) {
 		if (hasBeenThrown) {
 			StartCoroutine(Shatter());
 		}
@@ -38,7 +41,6 @@ public class PotionItem : HoldableObject {
 			PotionInteractionObject colliderPotionInteraction = collider.GetComponent<PotionInteractionObject>();
 			if (colliderPotionInteraction != null) {
 				if(colliderPotionInteraction.requiredEffect == effectType) {
-					Debug.Log("Hit " + collider.gameObject.name);
 					StartCoroutine(colliderPotionInteraction.HitByPotion());
 				}
 			}
