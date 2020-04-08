@@ -9,6 +9,9 @@
         _Metallic ("Metallic", Range(0,1)) = 0.0
         
         [Header(Wave Properties)]
+        _Amplitude ("Wave Amplitude", float) = 1
+        _Wavelength ("Wave Period Length", float) = 10
+        _Speed ("Wave Ripple Speed", float) = 1
         _WaveTexture ("Wave Texture", 2D) = "white" {}
         _WaveFrequency("Wave Frequency", Vector) = (0.05, 0.05, 0, 0)
     }
@@ -25,13 +28,16 @@
         // Use shader model 3.0 target, to get nicer looking lighting
         #pragma target 3.0
 
+        float _Amplitude;
+        float _Wavelength;
+        float _Speed;
         sampler2D _MainTex;
 
         struct Input
         {
             float2 uv_MainTex;
         };
- 
+
         half _Glossiness;
         half _Metallic;
         fixed4 _Color;
@@ -40,9 +46,16 @@
         {
             float3 p = vertexData.vertex.xyz;
 
-			p.y = sin(p.x);
+            float lambda = 2 * UNITY_PI / _Wavelength;
+            float time_element = p.x - (_Speed * _Time.y);
+            float f = lambda * time_element;
+			p.y = _Amplitude * sin(f);
+			
+			float3 tangent = normalize(float3(1, lambda * _Amplitude * cos(f), 0));
+			float3 normal = float3(-tangent.y, tangent.x, 0);
 
 			vertexData.vertex.xyz = p;
+			vertexData.normal = normal;
         }
 
         void surf (Input IN, inout SurfaceOutputStandard o)

@@ -1,5 +1,5 @@
 // Swaying Grass Shader adapted from https://roystan.net/articles/grass-shader.html
-Shader "Grass"
+Shader "Custom/Grass"
 {
     Properties
     {
