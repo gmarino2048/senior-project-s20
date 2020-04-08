@@ -1,4 +1,4 @@
-﻿Shader "Custom/Wave"
+﻿Shader "Custom/Waves"
 {
     Properties
     {
@@ -31,12 +31,19 @@
         {
             float2 uv_MainTex;
         };
-
+ 
         half _Glossiness;
         half _Metallic;
         fixed4 _Color;
         
-        void vert(inout appdata_full vertexData) {}
+        void vert(inout appdata_full vertexData)
+        {
+            float3 p = vertexData.vertex.xyz;
+
+			p.y = sin(p.x);
+
+			vertexData.vertex.xyz = p;
+        }
 
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
