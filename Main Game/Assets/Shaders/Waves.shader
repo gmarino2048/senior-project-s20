@@ -19,6 +19,7 @@
 
         CGPROGRAM
         // Physically based Standard lighting model, and enable shadows on all light types
+        #pragma vertex vert
         #pragma surface surf Standard fullforwardshadows
 
         // Use shader model 3.0 target, to get nicer looking lighting
@@ -34,6 +35,8 @@
         half _Glossiness;
         half _Metallic;
         fixed4 _Color;
+        
+        void vert(inout appdata_full vertexData) {}
 
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
