@@ -61,13 +61,15 @@
             p.z += dir.y * (amplitude * cos(time_element));
 			
 			float3 tangent = float3(
-			    1 - dir.x * dir.x * (_Steepness * sin(time_element)), 
-			    dir.y * (_Steepness * cos(time_element)), 
-			    -dir.x * dir.y * (_Steepness * sin(time_element)));
+				1 - dir.x * dir.x * (_Steepness * sin(time_element)),
+				dir.x * (_Steepness * cos(time_element)),
+				-dir.x * dir.y * (_Steepness * sin(time_element))
+			);
 			float3 binormal = float3(
-			    -dir.x * dir.y * (_Steepness * sin(time_element)),
-			    dir.y * (_Steepness * cos(time_element)),
-			    1 - dir.y * dir.y * (_Steepness * sin(time_element)));
+				-dir.x * dir.y * (_Steepness * sin(time_element)),
+				dir.y * (_Steepness * cos(time_element)),
+				1 - dir.y * dir.y * (_Steepness * sin(time_element))
+			);
 			float3 normal = normalize(cross(binormal, tangent));
 
 			vertexData.vertex.xyz = p;
