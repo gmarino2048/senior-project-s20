@@ -14,7 +14,8 @@ public class HoldableObject : InteractiveObject {
 
 	public override void Interact(Transform handTF) {
 		transform.parent = handTF;
-		transform.localPosition = new Vector3(0, 0, 0);
+		transform.localPosition = Vector3.zero;
+		transform.localRotation = Quaternion.identity;
 		GetComponent<Rigidbody>().isKinematic = true;
 		GetComponent<Collider>().enabled = false;
 	}
