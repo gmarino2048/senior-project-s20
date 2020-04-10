@@ -74,10 +74,10 @@ public class KeyboardPlayerController : MonoBehaviour {
 			}
 			else if(heldObject != null) {
 				if (targetPlacement != null) {
-					if (targetPlacement.requiredObject = heldObject.gameObject) {
+					if (targetPlacement.requiredObject == heldObject.gameObject) {
 						heldObject.ReleaseTo(targetPlacement.transform);
+						targetPlacement.PlacementTrigger(heldObject);
 						heldObject = null;
-						targetPlacement.PlacementTrigger();
 						return;
 					}
 				}
