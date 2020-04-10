@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class PlayerTransitionManager : MonoBehaviour
 {
@@ -10,7 +12,7 @@ public class PlayerTransitionManager : MonoBehaviour
     private TransitionTarget _target;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         // Initialize elements
         _playerCamera = gameObject.GetComponentInChildren<Camera>();
@@ -20,8 +22,14 @@ public class PlayerTransitionManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        // Grab primary mouse button
+        if (Input.GetMouseButtonDown(0))
+        {
+            HandleMousePressed();
+        }
+        
         // If mag glass enabled, cast out from camera
         if (_magnifyingGlass.isEnabled)
         {
@@ -48,7 +56,7 @@ public class PlayerTransitionManager : MonoBehaviour
                     return;
                 }
                 
-                _target = sceneTransition.Target;
+                _target = sceneTransition.target;
                 _magnifyingGlass.SetTransitionEnabled();
             }
             else
@@ -63,5 +71,14 @@ public class PlayerTransitionManager : MonoBehaviour
             // Maybe I should remove this for performance?
             _magnifyingGlass.SetTransitionDisabled();
         }
+    }
+
+    private void HandleMousePressed()
+    {
+        // Bail if no transition target
+        if (_target == null) return;
+        
+        var spawnPosition = _target.spawnPoint;
+        gameObject.transform.position = spawnPosition;
     }
 }

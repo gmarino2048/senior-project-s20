@@ -5,17 +5,6 @@ using UnityEngine.UI;
 
 public class SceneTransitionZone : MonoBehaviour
 {
-    public TransitionTarget Target { get; private set; }
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public TransitionTarget target;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
