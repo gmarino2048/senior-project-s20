@@ -20,7 +20,7 @@ public class Iceberg : PotionInteractionObject {
 		}
 	}
 
-	public override IEnumerator HitByPotion() {
+	public override IEnumerator PotionEffects() {
 		float timer = 0;
 		while (timer < meltDuration) {
 			timer += Time.deltaTime;

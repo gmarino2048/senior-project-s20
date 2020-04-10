@@ -30,6 +30,7 @@ public class PotionItem : HoldableObject {
 	protected virtual void OnCollisionEnter(Collision other) {
 		if (hasBeenThrown) {
 			StartCoroutine(Shatter());
+			hasBeenThrown = false;
 		}
 	}
 
@@ -41,7 +42,7 @@ public class PotionItem : HoldableObject {
 			PotionInteractionObject colliderPotionInteraction = collider.GetComponent<PotionInteractionObject>();
 			if (colliderPotionInteraction != null) {
 				if(colliderPotionInteraction.requiredEffect == effectType) {
-					StartCoroutine(colliderPotionInteraction.HitByPotion());
+					colliderPotionInteraction.HitByPotion();
 				}
 			}
 		}

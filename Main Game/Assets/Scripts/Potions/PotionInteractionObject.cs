@@ -5,5 +5,9 @@ using UnityEngine;
 public abstract class PotionInteractionObject : MonoBehaviour {
 	public PotionType requiredEffect;
 
-	abstract public IEnumerator HitByPotion();
+	public virtual void HitByPotion() {
+		StartCoroutine(PotionEffects());
+	}
+
+	abstract public IEnumerator PotionEffects();
 }
