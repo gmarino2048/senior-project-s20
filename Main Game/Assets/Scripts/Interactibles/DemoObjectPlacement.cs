@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DemoObjectPlacement : ObjectPlacementVolume {
-	public override void PlacementTrigger() {
+	public override void PlacementTrigger(InteractiveObject interactiveObject) {
 		StartCoroutine(PlacementAnimation());
 	}
 
