@@ -10,7 +10,7 @@ public class DemoObjectPlacement : ObjectPlacementVolume {
 	private IEnumerator PlacementAnimation() {
 		yield return new WaitForSeconds(0.5f);
 		for(int i = 0; i < 60; i++) {
-			requiredObject.transform.Translate(new Vector3(0.0025f, 0, 0));
+			requiredObjects[0].transform.Translate(new Vector3(0.0025f, 0, 0));
 			yield return new WaitForFixedUpdate();
 		}
 
