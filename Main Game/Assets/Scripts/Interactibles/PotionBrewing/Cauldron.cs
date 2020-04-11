@@ -84,7 +84,7 @@ public class Cauldron : MonoBehaviour
 		{
 			newPotion = new Potion("Bad potion");
 		}
-		Debug.Log(newPotion.name);
+		Debug.Log("New potion is determined on line 87 of Couldron.cs: " + newPotion.name);
 	}
 
 
