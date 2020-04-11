@@ -74,7 +74,7 @@ public class KeyboardPlayerController : MonoBehaviour {
 			}
 			else if(heldObject != null) {
 				if (targetPlacement != null) {
-					if (targetPlacement.requiredObjects.Contains(heldObject.gameObject)) {
+					if (targetPlacement.requiredObjects.Contains(heldObject.gameObject) || heldObject.gameObject.tag == targetPlacement.requiredTag) {
 						heldObject.ReleaseTo(targetPlacement.transform);
 						targetPlacement.PlacementTrigger(heldObject);
 						heldObject = null;

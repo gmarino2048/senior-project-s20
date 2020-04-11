@@ -7,6 +7,9 @@ public class IngredientPlacement : ObjectPlacementVolume
 	public override void PlacementTrigger(InteractiveObject ingredient)
 	{
 		Debug.Log(ingredient.GetComponent<IngredientObject>().GetIngredient());
+		Debug.Log(requiredTag);
+		Debug.Log(ingredient.gameObject.tag);
+		Debug.Log(requiredTag.Equals(ingredient.gameObject.tag));
 		Cauldron.AddIngredient(ingredient);
 		StartCoroutine(PlacementAnimation(ingredient));
 	}

@@ -9,6 +9,7 @@ TagManager:
   - SnapCollider
   - SnappableObject
   - TopSnapCollider
+  - Ingredient
   layers:
   - Default
   - TransparentFX
