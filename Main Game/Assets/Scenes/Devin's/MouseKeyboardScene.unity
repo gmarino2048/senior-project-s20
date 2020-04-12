@@ -2001,6 +2001,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredObject: {fileID: 761927944}
+  requiredTag: 
 --- !u!33 &2014252176
 MeshFilter:
   m_ObjectHideFlags: 0
