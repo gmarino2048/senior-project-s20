@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Cauldron : MonoBehaviour
 {
+	public static event Action<string> Brewed = delegate { };
+
+
 	public List<Ingredient> Corrosive;
 	public List<Ingredient> GrowPlant;
 	public List<Ingredient> Burn;
@@ -85,6 +88,7 @@ public class Cauldron : MonoBehaviour
 			newPotion = new Potion("Bad potion");
 		}
 		Debug.Log("New potion is determined on line 87 of Couldron.cs: " + newPotion.name);
+		Brewed(newPotion.name);
 	}
 
 
