@@ -572,13 +572,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e417be410cfe0d24e8a85b8a10ac2dc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  corrosivePotion: {fileID: 440623155651165933, guid: da76b6480bff99144836f4c6794f450c,
+  corrosivePotion: {fileID: 8292653936921006107, guid: f6e36a4480635494a964fd099bf8f20d,
     type: 3}
   growPotion: {fileID: 440623155651165933, guid: da76b6480bff99144836f4c6794f450c,
     type: 3}
-  burnPotion: {fileID: 440623155651165933, guid: da76b6480bff99144836f4c6794f450c,
+  burnPotion: {fileID: 2388262339138664944, guid: b38a8d4b2fee03349ae675ac4617c78b,
     type: 3}
-  freezePotion: {fileID: 440623155651165933, guid: da76b6480bff99144836f4c6794f450c,
+  freezePotion: {fileID: 3574466939176836334, guid: e97f9350b9392b14faf5909a33f42215,
     type: 3}
   explodePotion: {fileID: 440623155651165933, guid: da76b6480bff99144836f4c6794f450c,
     type: 3}
@@ -622,6 +622,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleAmount: 1.01
   InteractionIsHeld: 0
+  IsSpawner: 0
+  ObjectToSpawn: {fileID: 0}
   ingredient: 2
 --- !u!54 &1139878575
 Rigidbody:
@@ -747,6 +749,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleAmount: 1.01
   InteractionIsHeld: 0
+  IsSpawner: 0
+  ObjectToSpawn: {fileID: 0}
   ingredient: 1
 --- !u!54 &1222890898
 Rigidbody:
@@ -872,6 +876,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleAmount: 1.01
   InteractionIsHeld: 0
+  IsSpawner: 0
+  ObjectToSpawn: {fileID: 0}
   ingredient: 3
 --- !u!54 &1713356126
 Rigidbody:
@@ -997,6 +1003,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleAmount: 1.01
   InteractionIsHeld: 0
+  IsSpawner: 0
+  ObjectToSpawn: {fileID: 0}
   ingredient: 4
 --- !u!54 &1814673689
 Rigidbody:
@@ -1191,6 +1199,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleAmount: 1.01
   InteractionIsHeld: 0
+  IsSpawner: 0
+  ObjectToSpawn: {fileID: 0}
   ingredient: 0
 --- !u!54 &1850831490
 Rigidbody:
@@ -1316,6 +1326,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleAmount: 1.01
   InteractionIsHeld: 0
+  IsSpawner: 0
+  ObjectToSpawn: {fileID: 0}
   ingredient: 2
 --- !u!54 &1974198096
 Rigidbody:
@@ -1532,6 +1544,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleAmount: 1.01
   InteractionIsHeld: 0
+  IsSpawner: 0
+  ObjectToSpawn: {fileID: 0}
   ingredient: 1
 --- !u!54 &2099439357
 Rigidbody:
@@ -1622,72 +1636,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &7755307788274360323
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 440623155651165933, guid: da76b6480bff99144836f4c6794f450c,
-        type: 3}
-      propertyPath: m_Name
-      value: Test Tube
-      objectReference: {fileID: 0}
-    - target: {fileID: 3478522411890035966, guid: da76b6480bff99144836f4c6794f450c,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3478522411890035966, guid: da76b6480bff99144836f4c6794f450c,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3478522411890035966, guid: da76b6480bff99144836f4c6794f450c,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3478522411890035966, guid: da76b6480bff99144836f4c6794f450c,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 3478522411890035966, guid: da76b6480bff99144836f4c6794f450c,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3478522411890035966, guid: da76b6480bff99144836f4c6794f450c,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3478522411890035966, guid: da76b6480bff99144836f4c6794f450c,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071067
-      objectReference: {fileID: 0}
-    - target: {fileID: 3478522411890035966, guid: da76b6480bff99144836f4c6794f450c,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 3478522411890035966, guid: da76b6480bff99144836f4c6794f450c,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3478522411890035966, guid: da76b6480bff99144836f4c6794f450c,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3478522411890035966, guid: da76b6480bff99144836f4c6794f450c,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: da76b6480bff99144836f4c6794f450c, type: 3}
