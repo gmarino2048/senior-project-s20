@@ -70,12 +70,12 @@ public class KeyboardPlayerController : MonoBehaviour {
 			if (targetInteractive != null && heldObject == null) {
 				if (targetInteractive.IsSpawner)
 				{
-					Debug.Log("IsSpawner");
+					//Debug.Log("IsSpawner");
 					heldObject = targetInteractive.GenerateSpawnedObject();
 				}
 				else if (targetInteractive.InteractionIsHeld)
 					heldObject = targetInteractive;
-				Debug.Log(heldObject.name);
+				//Debug.Log(heldObject.name);
 				targetInteractive.Interact(handTF);
 			}
 			else if(heldObject != null) {

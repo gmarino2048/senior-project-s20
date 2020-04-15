@@ -6,7 +6,7 @@ public class InteractableSpawner : InteractiveObject
 {
 	public override void Interact(Transform handTF)
 	{
-		Debug.Log(GetSpawnedObject());
+		//Debug.Log(GetSpawnedObject());
 		GetSpawnedObject().transform.parent = handTF;
 		GetSpawnedObject().transform.localPosition = Vector3.zero;
 		GetSpawnedObject().transform.localRotation = Quaternion.identity;
