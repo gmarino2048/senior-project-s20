@@ -24,6 +24,7 @@ public abstract class InteractiveObject : MonoBehaviour {
 	}
 
 	protected virtual IEnumerator HighlightCoroutine() {
+		//This breaks if the object switches to a parent w/ a different scale so... let's try no to do that
 		transform.localScale *= scaleAmount;
 		yield return new WaitForEndOfFrame();
 		transform.localScale = originalScale;
@@ -36,6 +37,7 @@ public abstract class InteractiveObject : MonoBehaviour {
 	public virtual void Release() { }
 
 	public virtual void ReleaseTo(Transform placementPosition) {
+		transform.parent = null;
 		transform.parent = placementPosition;
 		transform.localPosition = Vector3.zero;
 		transform.localRotation = Quaternion.identity;
