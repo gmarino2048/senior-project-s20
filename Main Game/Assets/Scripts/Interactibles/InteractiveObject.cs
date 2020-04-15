@@ -11,6 +11,10 @@ public abstract class InteractiveObject : MonoBehaviour {
 	//If this is true, then interaction behavior will be held over multiple frames. False for things where the player clicks & they run Interact once
 	public bool InteractionIsHeld;
 
+	public bool IsSpawner;
+	public InteractiveObject ObjectToSpawn;
+	private InteractiveObject SpawnedObject;
+
 	protected virtual void Start() {
 		originalScale = transform.localScale;
 	}
@@ -35,5 +39,16 @@ public abstract class InteractiveObject : MonoBehaviour {
 		transform.parent = placementPosition;
 		transform.localPosition = Vector3.zero;
 		transform.localRotation = Quaternion.identity;
+	}
+
+	public virtual InteractiveObject GenerateSpawnedObject()
+	{
+		SpawnedObject = Instantiate(ObjectToSpawn);
+		return SpawnedObject;
+	}
+
+	public virtual InteractiveObject GetSpawnedObject()
+	{
+		return SpawnedObject;
 	}
 }

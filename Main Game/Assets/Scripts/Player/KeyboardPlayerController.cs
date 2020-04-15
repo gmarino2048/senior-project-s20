@@ -68,9 +68,15 @@ public class KeyboardPlayerController : MonoBehaviour {
 		//Click behaviors
 		if (Input.GetMouseButtonDown(0)) {
 			if (targetInteractive != null && heldObject == null) {
-				targetInteractive.Interact(handTF);
-				if (targetInteractive.InteractionIsHeld)
+				if (targetInteractive.IsSpawner)
+				{
+					//Debug.Log("IsSpawner");
+					heldObject = targetInteractive.GenerateSpawnedObject();
+				}
+				else if (targetInteractive.InteractionIsHeld)
 					heldObject = targetInteractive;
+				//Debug.Log(heldObject.name);
+				targetInteractive.Interact(handTF);
 			}
 			else if(heldObject != null) {
 				if (targetPlacement != null) {
