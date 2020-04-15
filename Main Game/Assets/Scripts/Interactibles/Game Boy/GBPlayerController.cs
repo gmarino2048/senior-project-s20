@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GBDemoCube : MonoBehaviour {
+public class GBPlayerController : MonoBehaviour {
 	public float moveSpeed;
+
+	//For jumping:
 	public Vector3 jumpForce;
+	[SerializeField] private Transform leftFoot, rightFoot;
+	private float coyoteTimer;
 
 	private Rigidbody rb;
-	private bool grounded;
 
 	private bool isActive = false;
 
@@ -18,6 +21,7 @@ public class GBDemoCube : MonoBehaviour {
 	private void FixedUpdate() {
 		Vector3 position = transform.position;
 		float newX = position.x;
+		bool canJump = updateGrounded();
 
 		if (isActive) {
 			if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) {
@@ -29,22 +33,27 @@ public class GBDemoCube : MonoBehaviour {
 			transform.position = new Vector3(newX, position.y, position.z);
 
 			if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) {
-				if (grounded)
+				if (canJump) {
+					coyoteTimer = 0;
 					rb.AddForce(jumpForce);
+				}
 			}
 		}
 	}
 
-	private void OnCollisionEnter(Collision collision) {
-		grounded = true;
-	}
+	private bool updateGrounded() {
+		if (Physics.Raycast(leftFoot.position, -transform.up, 0.01f) || Physics.Raycast(rightFoot.position, -transform.up, 0.01f)) {
+			return true;
+		}
+		//Gives a bit of leeway when running off platforms 
+		coyoteTimer -= Time.deltaTime;
+		if (coyoteTimer > 0)
+			return true;
 
-	private void OnCollisionExit(Collision collision) {
-		grounded = false;
+		return false;
 	}
 
 	public void SetControlState(bool cubeIsActive) {
-		Debug.Log("set to " + cubeIsActive);
 		isActive = cubeIsActive;
 	}
 }

@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PipeStarter : PipeSegment {
-	private PipeEndpoint flowStartpoint;
 	private bool flowing;
+	private bool waterCanFlow;
 
 	protected override void Start() {
 		base.Start();
-		flowStartpoint = GetComponentInChildren<PipeEndpoint>();
+	}
+
+	//Called by the cogboard puzzle to turn this whole puzzle on. Does not start water flow through pipes though
+	public void ActivateStarter() {
+		isShaking = true;
+		waterCanFlow = true;
 	}
 
 	public override void OnMouseDown() {
-		if(!flowing)
+		if(!flowing && waterCanFlow)
 			StartCoroutine(FlowThrough(null));
 	}
 
