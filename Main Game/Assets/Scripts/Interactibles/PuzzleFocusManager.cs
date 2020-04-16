@@ -22,7 +22,6 @@ public class PuzzleFocusManager : InteractiveObject {
 	}
 
 	public override void Interact(Transform handTF) {
-		Debug.Log("togling");
 		ToggleState(true);
 	}
 

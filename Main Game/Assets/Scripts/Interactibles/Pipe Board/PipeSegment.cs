@@ -90,7 +90,7 @@ public class PipeSegment : MonoBehaviour {
 			degrees += turnAmount;
 			yield return new WaitForEndOfFrame();
 		}
-		transform.eulerAngles = new Vector3(0, 0, (int) transform.eulerAngles.z);
+		//transform.eulerAngles = new Vector3(0, 0, (int) transform.eulerAngles.z);
 		transform.Rotate(new Vector3(0, 0, -(transform.eulerAngles.z % 90)));
 		canRotate = true;
 	}

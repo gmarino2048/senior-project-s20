@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7777997740730553417}
   - component: {fileID: 1633673082319548031}
   - component: {fileID: 5014600302247924358}
+  - component: {fileID: 6369404990599074990}
   m_Layer: 0
   m_Name: Potion Dispensing System
   m_TagString: Untagged
@@ -25,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6749671418186688090}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 1, z: 1}
+  m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
 --- !u!33 &1633673082319548031
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -57,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6478536213147159724, guid: e25fecd9fd3ab764e8007177de517383, type: 3}
+  - {fileID: 2100000, guid: 2bfc2af9a5d5c9f4c9ae1982fd803a4e, type: 2}
   - {fileID: -3846018093981099296, guid: e25fecd9fd3ab764e8007177de517383, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -79,3 +80,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &6369404990599074990
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6749671418186688090}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.6838828, y: 2.0000002, z: 1.810636}
+  m_Center: {x: 0.15805858, y: 0, z: -0.09468208}

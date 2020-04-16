@@ -36,7 +36,7 @@ public class CogBoard : MonoBehaviour
 		}
 
 		cogBoardSolved = cog1 && cog2 && cog3;
-		Debug.Log("Cog board solved: " + cogBoardSolved);
+		//Debug.Log("Cog board solved: " + cogBoardSolved);
 	}
 
 	public bool isCogBoardSolved()

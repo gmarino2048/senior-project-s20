@@ -10,6 +10,7 @@ TagManager:
   - SnappableObject
   - TopSnapCollider
   - Ingredient
+  - Water
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Post-Process Volumes
   - 
   - 
   - 

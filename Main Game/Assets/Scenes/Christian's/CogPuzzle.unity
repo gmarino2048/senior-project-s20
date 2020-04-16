@@ -443,11 +443,6 @@ PrefabInstance:
       propertyPath: requiredInteractiveObject
       value: 
       objectReference: {fileID: 51735165}
-    - target: {fileID: 3031803831558825940, guid: 89d221f1dc5f4ec4f9ab39eaecbee84f,
-        type: 3}
-      propertyPath: slot
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3031803832478808432, guid: 89d221f1dc5f4ec4f9ab39eaecbee84f,
         type: 3}
       propertyPath: requiredObject
@@ -458,11 +453,6 @@ PrefabInstance:
       propertyPath: requiredInteractiveObject
       value: 
       objectReference: {fileID: 1775667981}
-    - target: {fileID: 3031803832478808432, guid: 89d221f1dc5f4ec4f9ab39eaecbee84f,
-        type: 3}
-      propertyPath: slot
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 3031803833112869536, guid: 89d221f1dc5f4ec4f9ab39eaecbee84f,
         type: 3}
       propertyPath: requiredObject
@@ -473,11 +463,6 @@ PrefabInstance:
       propertyPath: requiredInteractiveObject
       value: 
       objectReference: {fileID: 122616197}
-    - target: {fileID: 3031803833112869536, guid: 89d221f1dc5f4ec4f9ab39eaecbee84f,
-        type: 3}
-      propertyPath: slot
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 3031803833523070734, guid: 89d221f1dc5f4ec4f9ab39eaecbee84f,
         type: 3}
       propertyPath: m_LocalPosition.x

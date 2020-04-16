@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6219532250550886888}
   - component: {fileID: 3101626773459491806}
   - component: {fileID: 8662595222081840935}
+  - component: {fileID: -5623876325175923844}
   m_Layer: 0
   m_Name: Raised Platform w Ramp
   m_TagString: Untagged
@@ -26,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6920746722393920507}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.00017094932, y: 0.00022463407, z: -0.00029888004}
-  m_LocalScale: {x: 1.2191056, y: 1.2191056, z: 1.450159}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &-5623876325175923844
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6920746722393920507}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4579454407841743219, guid: 348a232ba01c7314db7cad63c33fb919, type: 3}

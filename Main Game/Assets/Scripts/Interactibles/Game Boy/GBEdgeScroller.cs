@@ -14,13 +14,13 @@ public class GBEdgeScroller : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter(Collider other) {
-		if(other.GetComponent<GBDemoCube>() != null) {
+		if(other.GetComponent<GBPlayerController>() != null) {
 			scrolling = true;
 		}
 	}
 
 	private void OnTriggerExit(Collider other) {
-		if(other.GetComponent<GBDemoCube>() != null) {
+		if(other.GetComponent<GBPlayerController>() != null) {
 			scrolling = false;
 		}
 	}

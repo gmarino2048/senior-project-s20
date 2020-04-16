@@ -68,9 +68,15 @@ public class KeyboardPlayerController : MonoBehaviour {
 		//Click behaviors
 		if (Input.GetMouseButtonDown(0)) {
 			if (targetInteractive != null && heldObject == null) {
-				targetInteractive.Interact(handTF);
-				if (targetInteractive.InteractionIsHeld)
+				if (targetInteractive.IsSpawner)
+				{
+					//Debug.Log("IsSpawner");
+					heldObject = targetInteractive.GenerateSpawnedObject();
+				}
+				else if (targetInteractive.InteractionIsHeld)
 					heldObject = targetInteractive;
+				//Debug.Log(heldObject.name);
+				targetInteractive.Interact(handTF);
 			}
 			else if(heldObject != null) {
 				if (targetPlacement != null) {
@@ -138,6 +144,7 @@ public class KeyboardPlayerController : MonoBehaviour {
 		movementLocked = lockPlayer;
 		Cursor.visible = lockPlayer;
 		if (lockPlayer) {
+			rb.velocity = Vector3.zero;
 			Cursor.lockState = CursorLockMode.None;
 			reticle.SetActive(false);
 		}

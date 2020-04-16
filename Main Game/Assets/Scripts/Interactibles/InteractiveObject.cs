@@ -11,6 +11,10 @@ public abstract class InteractiveObject : MonoBehaviour {
 	//If this is true, then interaction behavior will be held over multiple frames. False for things where the player clicks & they run Interact once
 	public bool InteractionIsHeld;
 
+	public bool IsSpawner;
+	public InteractiveObject ObjectToSpawn;
+	private InteractiveObject SpawnedObject;
+
 	protected virtual void Start() {
 		originalScale = transform.localScale;
 	}
@@ -20,6 +24,7 @@ public abstract class InteractiveObject : MonoBehaviour {
 	}
 
 	protected virtual IEnumerator HighlightCoroutine() {
+		//This breaks if the object switches to a parent w/ a different scale so... let's try no to do that
 		transform.localScale *= scaleAmount;
 		yield return new WaitForEndOfFrame();
 		transform.localScale = originalScale;
@@ -32,8 +37,20 @@ public abstract class InteractiveObject : MonoBehaviour {
 	public virtual void Release() { }
 
 	public virtual void ReleaseTo(Transform placementPosition) {
+		transform.parent = null;
 		transform.parent = placementPosition;
 		transform.localPosition = Vector3.zero;
 		transform.localRotation = Quaternion.identity;
+	}
+
+	public virtual InteractiveObject GenerateSpawnedObject()
+	{
+		SpawnedObject = Instantiate(ObjectToSpawn);
+		return SpawnedObject;
+	}
+
+	public virtual InteractiveObject GetSpawnedObject()
+	{
+		return SpawnedObject;
 	}
 }
