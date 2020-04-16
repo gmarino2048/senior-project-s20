@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class GBWinTrigger : MonoBehaviour {
 	[SerializeField] private GameObject winScreen;
-	private TreehouseWindow windowController;
+	[SerializeField] private HingeOpener windowController;
 	private GBFocusManager focuser;
 
 	void Start() {
-		windowController = FindObjectOfType<TreehouseWindow>();
 		focuser = FindObjectOfType<GBFocusManager>();
 	}
 
@@ -16,7 +15,7 @@ public class GBWinTrigger : MonoBehaviour {
 		if(other.gameObject.GetComponent<GBPlayerController>() != null) {
 			winScreen.SetActive(true);
 			focuser.ToggleState(false);
-			windowController.OpenWindow();
+			windowController.Open();
 			Destroy(this.gameObject);
 		}
 	}
