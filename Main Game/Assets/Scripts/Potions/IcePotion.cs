@@ -21,8 +21,21 @@ public class IcePotion : PotionItem {
 	}
 
 	protected override IEnumerator Shatter() {
-		particles.Play();
-		yield return new WaitForSeconds(particles.main.startLifetime.constantMax);
+		glassParticles.Play();
+		splashParticles.Play();
+		rb.isKinematic = true;
+		glowLight.intensity = brokenLightIntensity;
+		GetComponent<MeshRenderer>().enabled = false;
+
+		yield return new WaitForSeconds(splashParticles.main.duration * 0.75f);
+
+		float timer = 0;
+		float goalTime = splashParticles.main.duration * 0.25f;
+		while (timer < goalTime) {
+			timer += Time.deltaTime;
+			glowLight.intensity = Mathf.Lerp(brokenLightIntensity, 0, timer / goalTime);
+			yield return new WaitForEndOfFrame();
+		}
 		Destroy(this.gameObject);
 	}
 }
