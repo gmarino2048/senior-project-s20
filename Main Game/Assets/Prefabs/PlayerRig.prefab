@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 75122920532399746}
   - component: {fileID: 75122920532399745}
   - component: {fileID: 75122920532399744}
+  - component: {fileID: 5057285787087974612}
   m_Layer: 2
   m_Name: Player
   m_TagString: Untagged
@@ -354,6 +355,18 @@ MonoBehaviour:
   reticle: {fileID: 0}
   handTF: {fileID: 75122920198844233}
   objectDropPoint: {fileID: 8951000465996677935}
+--- !u!114 &5057285787087974612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75122920532399771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ad2a4ac977b64450ba0b13cd1afaa39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &75122920693526339
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,10 +444,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magnifyingGlassObject: {fileID: 4238094914964667563}
   rotationDuration: 0.4
-  inactiveColor: {r: 0, g: 0, b: 0, a: 0}
-  sceneTransitionColor: {r: 0, g: 0, b: 0, a: 0}
-  colorSwapDuration: 0
-  lens: {fileID: 0}
+  inactiveColor: {r: 0, g: 1, b: 0.95960426, a: 1}
+  sceneTransitionColor: {r: 0.0019526482, g: 1, b: 0, a: 1}
+  colorSwapDuration: 0.3
+  lens: {fileID: 996356807844002310}
 --- !u!1 &1019133478176653449
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,6 +624,12 @@ GameObject:
 --- !u!4 &4238094914964667562 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7255003061030703344, guid: cf969d02f3d6a3a698f221388f8a9877,
+    type: 3}
+  m_PrefabInstance: {fileID: 6808965476517997658}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &996356807844002310 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6029628559001491036, guid: cf969d02f3d6a3a698f221388f8a9877,
     type: 3}
   m_PrefabInstance: {fileID: 6808965476517997658}
   m_PrefabAsset: {fileID: 0}
