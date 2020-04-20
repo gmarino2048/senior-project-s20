@@ -30,6 +30,7 @@ public class PlantSegment : PotionInteractionObject {
 		activePS.Play();
 		yield return new WaitForSeconds(activePS.main.duration);
 		GetComponent<MeshRenderer>().enabled = isGrowing;
+		GetComponent<Collider>().enabled = isGrowing;
 		yield return new WaitForSeconds(activePS.main.duration);
 		gameObject.SetActive(isGrowing);
 	}
