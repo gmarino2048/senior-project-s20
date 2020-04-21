@@ -29,6 +29,8 @@ public class LockedObject : InteractiveObject
 
 	public override void Interact(Transform handTF)
 	{
+		if (!locked)
+			gameObject.SetActive(false);
 		Debug.Log("Lock is " + locked);
 	}
 }
