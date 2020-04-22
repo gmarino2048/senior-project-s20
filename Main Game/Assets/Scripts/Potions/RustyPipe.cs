@@ -28,7 +28,6 @@ public class RustyPipe : PotionInteractionObject {
 			waterPlane.transform.position = newWaterPos;
 			yield return new WaitForEndOfFrame();
 		}
-
 		particles.Stop();
 	}
 }
