@@ -8,6 +8,7 @@ public class HingeOpener : MonoBehaviour {
 	[SerializeField] private Transform exteriorHinge;
 
 	public void Open() {
+		print("run");
 		StartCoroutine(OpenCoroutine());
 	}
 
@@ -18,7 +19,7 @@ public class HingeOpener : MonoBehaviour {
 			transform.Rotate(new Vector3(0, 0, (Time.deltaTime / openDuration) * openDegrees));
 			yield return new WaitForEndOfFrame();
 		}
-
-		exteriorHinge.Rotate(new Vector3(0, 0, openDegrees));
+		if(exteriorHinge != null)
+			exteriorHinge.Rotate(new Vector3(0, 0, openDegrees));
 	}
 }
