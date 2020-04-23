@@ -67,7 +67,7 @@ public class PlayerTransitionManager : MonoBehaviour
         }
         else
         {
-            _target = null;
+			_target = null;
             // Maybe I should remove this for performance?
             _magnifyingGlass.SetTransitionDisabled();
         }
@@ -75,8 +75,45 @@ public class PlayerTransitionManager : MonoBehaviour
 
     private void HandleMousePressed()
     {
-        // Bail if no transition target
-        if (_target == null) return;
+		var cameraTransform = _playerCamera.gameObject.transform;
+
+		var result = Physics.Raycast(
+			cameraTransform.position,
+			cameraTransform.TransformDirection(Vector3.forward),
+			out var hit
+		);
+
+		Debug.Log("Raytracing");
+
+		if (result)
+		{
+			var compareObject = hit.collider.gameObject;
+			var sceneTransition = compareObject.GetComponent<SceneTransitionZone>();
+
+			Debug.Log(sceneTransition);
+
+			if (sceneTransition == null)
+			{
+				_target = null;
+
+				return;
+			}
+
+			Debug.Log(sceneTransition.notNeedMagGlass);
+			if (sceneTransition.notNeedMagGlass)
+			{
+				_target = sceneTransition.target;
+			}
+		}
+		else
+		{
+			_target = null; // Don't forget to reset the target
+		}
+
+		Debug.Log(_target);
+
+		// Bail if no transition target
+		if (_target == null) return;
         
         var spawnPosition = _target.spawnPoint;
         gameObject.transform.position = spawnPosition;

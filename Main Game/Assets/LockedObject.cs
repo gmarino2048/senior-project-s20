@@ -6,6 +6,8 @@ public class LockedObject : InteractiveObject
 {
 	[SerializeField]
 	private bool locked;
+
+	public GameObject toActivate;
 	// Start is called before the first frame update
 	protected override void Start()
 	{
@@ -30,7 +32,10 @@ public class LockedObject : InteractiveObject
 	public override void Interact(Transform handTF)
 	{
 		if (!locked)
+		{
 			gameObject.SetActive(false);
+			toActivate.SetActive(true);
+		}
 		Debug.Log("Lock is " + locked);
 	}
 }

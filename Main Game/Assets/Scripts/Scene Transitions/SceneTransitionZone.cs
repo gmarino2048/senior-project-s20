@@ -7,4 +7,5 @@ public class SceneTransitionZone : MonoBehaviour
 {
     public TransitionTarget target;
 
+	public bool notNeedMagGlass;
 }

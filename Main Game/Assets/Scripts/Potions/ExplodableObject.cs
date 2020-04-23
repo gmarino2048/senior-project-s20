@@ -5,11 +5,14 @@ using UnityEngine;
 public class ExplodableObject : PotionInteractionObject {
 	[SerializeField] ParticleSystem[] explosionParticles;
 
+	public GameObject RevealedObject;
 	void Start() {
 		requiredEffect = PotionType.Explosive;
 	}
 
-	public override IEnumerator PotionEffects() {
+	public override IEnumerator PotionEffects()
+	{
+		RevealedObject.SetActive(true);
 		this.gameObject.SetActive(false);
 		float partSysDuration = explosionParticles[0].main.duration;
 
@@ -23,7 +26,5 @@ public class ExplodableObject : PotionInteractionObject {
 			myCollider.enabled = false;
 
 		yield return new WaitForSeconds(partSysDuration);
-
-		
 	}
 }
