@@ -1,18 +1,21 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TotemDropTarget : MonoBehaviour
+public class TotemDropTarget : ObjectPlacementVolume
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private TotemController.GemColor color;
 
-    // Update is called once per frame
-    void Update()
+    private TotemController _controller; 
+    
+    private void Start()
     {
-        
+        _controller = GetComponentInParent<TotemController>();
+    }
+    
+    public override void PlacementTrigger(InteractiveObject placedObject)
+    {
+        _controller.AddGem(color);
     }
 }
