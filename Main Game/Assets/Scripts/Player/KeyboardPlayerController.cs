@@ -14,7 +14,7 @@ public class KeyboardPlayerController : MonoBehaviour {
 	private float camXRotation; //Used to keep the camera from flipping over vertically
 	public float mouseSensitivity;
 	[SerializeField] private GameObject reticle;
-	[SerializeField] private Image blackScreen;
+	[SerializeField] private Image colorScreen;
 
 	private Rigidbody rb;
 	private MagnifyingGlassManager magnifyingGlass;
@@ -36,7 +36,8 @@ public class KeyboardPlayerController : MonoBehaviour {
 
 		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
-		blackScreen.CrossFadeAlpha(0, 0, true);
+		colorScreen.color = Color.black;
+		colorScreen.CrossFadeAlpha(0, 0, true);
 	}
 
 	//Only used for camera movement
@@ -170,15 +171,16 @@ public class KeyboardPlayerController : MonoBehaviour {
 	}
 
 	public IEnumerator OutOfBounds(Transform spawnPoint, float fadeInTime, float fadeOutTime) {
-		StartCoroutine(FadeToBlack(fadeInTime, fadeOutTime));
+		StartCoroutine(ScreenFade(fadeInTime, fadeOutTime, Color.black));
 		yield return new WaitForSeconds(fadeInTime);
 		transform.position = spawnPoint.position;
 	}
 
-	public IEnumerator FadeToBlack(float fadeInTime, float fadeOutTime){
-		blackScreen.CrossFadeAlpha(1, fadeInTime, true);
+	public IEnumerator ScreenFade(float fadeInTime, float fadeOutTime, Color screenColor){
+		colorScreen.color = screenColor;
+		colorScreen.CrossFadeAlpha(1, fadeInTime, true);
 		yield return new WaitForSeconds(fadeInTime + 0.5f	);
-		blackScreen.CrossFadeAlpha(0, fadeOutTime, true);
+		colorScreen.CrossFadeAlpha(0, fadeOutTime, true);
 	}
 
 	public static void ActivateMagnifyingGlass()
