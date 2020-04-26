@@ -5,6 +5,7 @@ using UnityEngine;
 public class GBWinTrigger : MonoBehaviour {
 	[SerializeField] private GameObject winScreen;
 	[SerializeField] private HingeOpener windowController;
+	[SerializeField] private Collider gemPrison;
 	private GBFocusManager focuser;
 
 	void Start() {
@@ -16,6 +17,7 @@ public class GBWinTrigger : MonoBehaviour {
 			winScreen.SetActive(true);
 			focuser.ToggleState(false);
 			windowController.Open();
+			gemPrison.enabled = false;
 			Destroy(this.gameObject);
 		}
 	}
