@@ -312,12 +312,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9240ef9d53bf004459f53a94a8556d68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleAmount: 1.01
-  InteractionIsHeld: 0
-  IsSpawner: 0
-  ObjectToSpawn: {fileID: 0}
-  locked: 1
-  toActivate: {fileID: 0}
+  requiredObject: {fileID: 0}
+  requiredTag: 
+  toActivate: {fileID: 1374862339746519064}
 --- !u!1 &5396272213425659118
 GameObject:
   m_ObjectHideFlags: 0

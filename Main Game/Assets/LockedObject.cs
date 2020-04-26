@@ -2,40 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LockedObject : InteractiveObject
+public class LockedObject : ObjectPlacementVolume
 {
-	[SerializeField]
-	private bool locked;
-
 	public GameObject toActivate;
-	// Start is called before the first frame update
-	protected override void Start()
-	{
-		base.Start();
-		KeyObject.Unlocked += checkUnlocked;
-	}
 
-	private void checkUnlocked(bool unlocked, GameObject lockedObject)
+	public override void PlacementTrigger(InteractiveObject placedObject)
 	{
-		if(gameObject == lockedObject)
-		{
-			locked = false;
-			Debug.Log("Unlocked " + lockedObject.name);
-		}
-	}
-
-	public bool isLocked()
-	{
-		return locked;
-	}
-
-	public override void Interact(Transform handTF)
-	{
-		if (!locked)
+		if(requiredObject == placedObject)
 		{
 			gameObject.SetActive(false);
 			toActivate.SetActive(true);
 		}
-		Debug.Log("Lock is " + locked);
 	}
 }

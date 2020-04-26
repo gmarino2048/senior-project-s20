@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class KeyObject : InteractiveObject
+public class KeyObject : HoldableObject
 {
 	[SerializeField]
 	private GameObject lockedObject;
@@ -12,18 +12,12 @@ public class KeyObject : InteractiveObject
 	protected override void Start()
 	{
 		base.Start();
-		InteractionIsHeld = false;
 	}
-
-	public override void Interact(Transform handTF)
+	public override void ReleaseTo(Transform placementPosition)
 	{
-		Debug.Log("Grabbed Key");
-		Unlocked(true, lockedObject);
-		gameObject.SetActive(false);
-	}
-
-	public override void Release()
-	{
-
+		transform.parent = placementPosition;
+		transform.localPosition = Vector3.zero;
+		transform.localRotation = Quaternion.identity;
+		GetComponent<Collider>().enabled = false;
 	}
 }
