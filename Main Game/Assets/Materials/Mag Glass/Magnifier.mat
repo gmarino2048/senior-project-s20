@@ -83,5 +83,5 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0, g: 1, b: 0.948718, a: 0.28235295}
-    - _EmissionColor: {r: 3e-45, g: 1.0000001, b: 0.95960414, a: 1.0000001}
+    - _EmissionColor: {r: 1.5372864e-20, g: 1.0000004, b: 0.959604, a: 1.0000004}
     - _FresnelColor: {r: 0.91135615, g: 1, b: 0.18823528, a: 1}
