@@ -11,6 +11,7 @@ public class BurnableObject : PotionInteractionObject {
 	}
 
 	public override IEnumerator PotionEffects() {
+		Debug.Log("Parent called");
 		float partSysDuration = flameParticles[0].main.duration;
 
 		foreach (ParticleSystem ps in flameParticles)
