@@ -20,6 +20,13 @@ public class IcePotion : PotionItem {
 		}
 	}
 
+	public void TriggerFromWater(Transform waterTF) {
+		hasBeenThrown = false;
+		StartCoroutine(Shatter());
+		GameObject ice = Instantiate(iceberg, transform.position, Quaternion.identity);
+		ice.transform.parent = waterTF;
+	}
+
 	protected override IEnumerator Shatter() {
 		glassParticles.Play();
 		splashParticles.Play();

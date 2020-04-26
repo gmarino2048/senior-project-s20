@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class RustyPipe : PotionInteractionObject {
 	[SerializeField] private GameObject waterPlane;
+	[SerializeField] private GameObject objectToDestroy;
 	[SerializeField] private float raiseHeight, raiseDuration;
 	private float originalWaterHeight;
 	private ParticleSystem particles;
@@ -21,6 +23,8 @@ public class RustyPipe : PotionInteractionObject {
 
 		float timer = 0;
 		Vector3 newWaterPos;
+		if (objectToDestroy != null)
+			Destroy(objectToDestroy);
 		while(timer < raiseDuration) {
 			timer += Time.deltaTime;
 			newWaterPos = waterPlane.transform.position;
