@@ -9,68 +9,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 75122920532399748, guid: 78e729cce38bd704980d28f04c0f17e1,
         type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.9163819
-      objectReference: {fileID: 0}
-    - target: {fileID: 75122920532399748, guid: 78e729cce38bd704980d28f04c0f17e1,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.40030524
-      objectReference: {fileID: 0}
-    - target: {fileID: 75122920532399748, guid: 78e729cce38bd704980d28f04c0f17e1,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2.89
-      objectReference: {fileID: 0}
-    - target: {fileID: 75122920532399748, guid: 78e729cce38bd704980d28f04c0f17e1,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 3.28
-      objectReference: {fileID: 0}
-    - target: {fileID: 75122920532399748, guid: 78e729cce38bd704980d28f04c0f17e1,
-        type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 132.80501
       objectReference: {fileID: 0}
     - target: {fileID: 75122920693526339, guid: 78e729cce38bd704980d28f04c0f17e1,
         type: 3}
       propertyPath: m_Name
-      value: PlayerRig
-      objectReference: {fileID: 0}
-    - target: {fileID: 75122920693526348, guid: 78e729cce38bd704980d28f04c0f17e1,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.3140756
-      objectReference: {fileID: 0}
-    - target: {fileID: 75122920693526348, guid: 78e729cce38bd704980d28f04c0f17e1,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.14899999
-      objectReference: {fileID: 0}
-    - target: {fileID: 75122920693526348, guid: 78e729cce38bd704980d28f04c0f17e1,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -6.411688
-      objectReference: {fileID: 0}
-    - target: {fileID: 75122920693526348, guid: 78e729cce38bd704980d28f04c0f17e1,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 75122920693526348, guid: 78e729cce38bd704980d28f04c0f17e1,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 75122920693526348, guid: 78e729cce38bd704980d28f04c0f17e1,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 75122920693526348, guid: 78e729cce38bd704980d28f04c0f17e1,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
+      value: TransitionPlayerRig
       objectReference: {fileID: 0}
     - target: {fileID: 75122920693526348, guid: 78e729cce38bd704980d28f04c0f17e1,
         type: 3}

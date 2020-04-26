@@ -20,7 +20,7 @@ public class ChestCrankStandalone : InteractiveObject {
 		float timer = chestHinge.openDuration;
 		while(timer > 0) {
 			timer -= Time.deltaTime;
-			crankHandle.transform.Rotate(new Vector3(0, 0, turnSpeed * Time.deltaTime));
+			crankHandle.transform.Rotate(new Vector3(turnSpeed * Time.deltaTime, 0, 0), Space.Self);
 			yield return new WaitForEndOfFrame();
 		}
 	}

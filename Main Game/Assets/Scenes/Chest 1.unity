@@ -683,6 +683,11 @@ PrefabInstance:
       propertyPath: reticle
       value: 
       objectReference: {fileID: 692692326}
+    - target: {fileID: 75122920532399744, guid: 78e729cce38bd704980d28f04c0f17e1,
+        type: 3}
+      propertyPath: mouseSensitivity
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 75122920693526339, guid: 78e729cce38bd704980d28f04c0f17e1,
         type: 3}
       propertyPath: m_Name

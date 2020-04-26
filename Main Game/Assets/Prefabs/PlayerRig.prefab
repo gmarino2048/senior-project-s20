@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 75122920532399751}
   - component: {fileID: 75122920532399750}
   - component: {fileID: 75122920532399749}
-  - component: {fileID: 75122920532399746}
+  - component: {fileID: 4620061972334180604}
   - component: {fileID: 75122920532399745}
   - component: {fileID: 75122920532399744}
   - component: {fileID: 5057285787087974612}
@@ -300,15 +300,15 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 75122920532399771}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: a09dd4d7a18197442afcde3bd5572fc1, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 1.9
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &75122920532399746
-BoxCollider:
+  m_Center: {x: 0, y: 0.05, z: 0}
+--- !u!136 &4620061972334180604
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -316,10 +316,11 @@ BoxCollider:
   m_GameObject: {fileID: 75122920532399771}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.22930765, z: 0.5}
-  m_Center: {x: 0, y: -0.73, z: 0}
+  m_Enabled: 1
+  m_Radius: 0.45
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &75122920532399745
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -348,10 +349,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ada355f6e2eb36b4e8153368d80f9204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 2.5
   accel: 2
   raycastRange: 2.5
-  mouseSensitivity: 4.5
+  mouseSensitivity: 1.75
   reticle: {fileID: 0}
   handTF: {fileID: 75122920198844233}
   objectDropPoint: {fileID: 8951000465996677935}
