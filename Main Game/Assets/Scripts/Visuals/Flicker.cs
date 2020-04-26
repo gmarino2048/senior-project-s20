@@ -17,6 +17,7 @@ namespace Visuals
         private System.Random _random;
 
         private List<Light> _campfireLights;
+        private List<float> _lightIntensity;
         private List<int> _primes;
         private List<FlickerInterval> _intervals;
 
@@ -24,10 +25,11 @@ namespace Visuals
 
         class FlickerInterval
         {
-            public Light light { get; }
-            public float interval { get; }
-            public float counter { get; set; }
+            private Light light { get; }
+            private float interval { get; }
+            private float counter { get; set; }
 
+            
             private readonly float _maxFlickerDuration;
             private readonly Random _random;
             private const float rampTime = 0.05f;
@@ -115,6 +117,11 @@ namespace Visuals
         {
             _random = new System.Random(randomSeed);
             _campfireLights = new List<Light>(GetCampfireLights());
+            
+            foreach (var light in _campfireLights)
+            {
+                _lightIntensity.Add(light.intensity);
+            }
 
             // Avoid light flicker overlapping
             if (numberPrimes < _campfireLights.Count * 2)
@@ -140,8 +147,18 @@ namespace Visuals
         {
             foreach (var flickerInterval in _intervals)
             {
-                
                 StartCoroutine(flickerInterval.Increment(Time.deltaTime * flickerSpeed));
+            }
+        }
+
+        public void ResetIntensity()
+        {
+            StopAllCoroutines();
+            
+            for (var i = 0; i < _campfireLights.Count; i++)
+            {
+                var light = _campfireLights[i];
+                light.intensity = _lightIntensity[i];
             }
         }
         
