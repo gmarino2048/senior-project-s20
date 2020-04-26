@@ -1182,6 +1182,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1609973511}
   m_PrefabAsset: {fileID: 0}
+--- !u!135 &1609973515 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 5296818140296810539, guid: ddb6ab456d7294baeb6c9c8e1135fd70,
+    type: 3}
+  m_PrefabInstance: {fileID: 1609973511}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1760539481
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1363,6 +1369,11 @@ PrefabInstance:
       propertyPath: exteriorHinge
       value: 
       objectReference: {fileID: 1505843714}
+    - target: {fileID: 6004068480517849034, guid: ac702a270b5559c48b5bae7731046ce4,
+        type: 3}
+      propertyPath: gemPrison
+      value: 
+      objectReference: {fileID: 1609973515}
     - target: {fileID: 6975948042300046367, guid: ac702a270b5559c48b5bae7731046ce4,
         type: 3}
       propertyPath: m_Name
