@@ -66,7 +66,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _Emission: 0
-    - _FresnelExponent: 0.82
+    - _FresnelExponent: 0.21
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -83,5 +83,5 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0, g: 1, b: 0.948718, a: 0.28235295}
-    - _EmissionColor: {r: 1.5372864e-20, g: 1.0000004, b: 0.959604, a: 1.0000004}
+    - _EmissionColor: {r: 6.9978963e-19, g: 1, b: 0.95960426, a: 1}
     - _FresnelColor: {r: 0.91135615, g: 1, b: 0.18823528, a: 1}
