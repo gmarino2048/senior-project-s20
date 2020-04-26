@@ -241,6 +241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   requiredEffect: 1
   waterPlane: {fileID: 6024636163652357121}
+  objectToDestroy: {fileID: 0}
   raiseHeight: 1.5
   raiseDuration: 3
 --- !u!1 &2898930929932321474
@@ -11182,6 +11183,11 @@ PrefabInstance:
     - target: {fileID: 7382162356910851897, guid: 8a5f23533fbe20440be677b2f344bf6c,
         type: 3}
       propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7382162356910851897, guid: 8a5f23533fbe20440be677b2f344bf6c,
+        type: 3}
+      propertyPath: m_LocalScale.z
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7382162356910851900, guid: 8a5f23533fbe20440be677b2f344bf6c,

@@ -6,10 +6,14 @@ public class WaterTrigger : MonoBehaviour {
 
 
 	private void OnTriggerEnter(Collider other) {
-		Debug.Log("yeh");
 		KeyboardPlayerController player = other.gameObject.GetComponent<KeyboardPlayerController>();
 		if(player != null) {
 			StartCoroutine(player.OutOfBounds(spawnPoint, fadeInTime, fadeOutTime));
+			return;
+		}
+		IcePotion potion = other.gameObject.GetComponent<IcePotion>();
+		if(potion != null) {
+			potion.TriggerFromWater(transform);
 		}
 	}
 }
