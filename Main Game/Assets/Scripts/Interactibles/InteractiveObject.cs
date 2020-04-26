@@ -37,7 +37,6 @@ public abstract class InteractiveObject : MonoBehaviour {
 	public virtual void Release() { }
 
 	public virtual void ReleaseTo(Transform placementPosition) {
-		transform.parent = null;
 		transform.parent = placementPosition;
 		transform.localPosition = Vector3.zero;
 		transform.localRotation = Quaternion.identity;
