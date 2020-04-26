@@ -24,6 +24,8 @@ public class KeyboardPlayerController : MonoBehaviour {
 	public Transform objectDropPoint;
 
 	private bool movementLocked = false;
+	[SerializeField]
+	private static bool hasMagnifyingGlass = false;
 
 	void Start() {
 		rb = GetComponent<Rigidbody>();
@@ -42,7 +44,7 @@ public class KeyboardPlayerController : MonoBehaviour {
 			HandHandler(target);
 
 			//Bound to 'q' since it's convenient and shaped the most like a magnifying glass
-			if (Input.GetKeyDown(KeyCode.Q)) {
+			if (hasMagnifyingGlass && Input.GetKeyDown(KeyCode.Q)) {
 				magnifyingGlass.Toggle();
 			}
 		}
@@ -157,5 +159,10 @@ public class KeyboardPlayerController : MonoBehaviour {
 	public void SetCameraState(bool enablePlayerCamera) {
 		camTF.GetComponent<Camera>().enabled = enablePlayerCamera;
 		camTF.GetComponent<AudioListener>().enabled = enablePlayerCamera;
+	}
+
+	public static void ActivateMagnifyingGlass()
+	{
+		hasMagnifyingGlass = true;
 	}
 }

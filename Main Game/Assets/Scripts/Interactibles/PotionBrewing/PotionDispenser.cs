@@ -40,6 +40,7 @@ public class PotionDispenser : MonoBehaviour
 				break;
 			case "explode":
 				Instantiate(explodePotion, explodePotionDispenser.transform);
+				Debug.Log("Instantiated explosive potion");
 				break;
 			default:
 				Debug.Log("Bad potion passed to potion dispenser.");
