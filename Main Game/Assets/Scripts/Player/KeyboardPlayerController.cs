@@ -78,6 +78,7 @@ public class KeyboardPlayerController : MonoBehaviour {
 			if (Input.GetMouseButtonDown(0)) {
 				if (targetTransitionZone != null && targetTransitionZone.notNeedMagGlass){
 					transform.position = targetTransitionZone.target.spawnPoint;
+					return;
 				}
 
 				if (targetInteractive != null && heldObject == null) {
