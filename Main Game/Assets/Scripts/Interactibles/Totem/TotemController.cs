@@ -40,6 +40,7 @@ public class TotemController : MonoBehaviour
     private IEnumerator EndGame()
     {
         // Do nothing yet...
+        Debug.Log("End game");
         yield return null;
     }
 }
