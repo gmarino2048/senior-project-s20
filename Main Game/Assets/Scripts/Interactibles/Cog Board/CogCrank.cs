@@ -19,7 +19,7 @@ public class CogCrank : InteractiveObject {
 
 	void Update() {
 		if (isCranking)
-			crankHandle.transform.Rotate(new Vector3(0, 0, rotationSpeed * Time.deltaTime));
+			crankHandle.transform.Rotate(new Vector3(-rotationSpeed * Time.deltaTime, 0, 0));
 	}
 
 	public override void Interact(Transform handTF) {
