@@ -7,6 +7,8 @@ public class CombinationLockController : MonoBehaviour
 	public int[] correctCombination = new int[5];
 	public int[] currentCombination = new int[5];
 	public GameObject suitCaseTop;
+	[SerializeField]
+	private GameObject objectToAppear;
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -34,6 +36,7 @@ public class CombinationLockController : MonoBehaviour
 
 	private IEnumerator Unlock()
 	{
+		objectToAppear.SetActive(true);
 		Debug.Log("Unlocked");
 		for (int i = 0; i < 15; i++)
 		{
