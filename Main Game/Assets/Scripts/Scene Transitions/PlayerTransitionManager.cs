@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using Visuals;
 
 public class PlayerTransitionManager : MonoBehaviour
 {
 	private Camera _playerCamera;
 	private MagnifyingGlassManager _magnifyingGlass;
+	private Flicker _campfire;
 
 	// Start is called before the first frame update
 	private void Start()
@@ -50,6 +52,7 @@ public class PlayerTransitionManager : MonoBehaviour
 				// Grab primary mouse button
 				if (Input.GetMouseButtonDown(0)) {
 					gameObject.transform.position = sceneTransition.target.spawnPoint;
+					_campfire.ResetIntensity();
 				}
 			}
 			else
