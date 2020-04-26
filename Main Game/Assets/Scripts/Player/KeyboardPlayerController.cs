@@ -60,37 +60,42 @@ public class KeyboardPlayerController : MonoBehaviour {
 		//First get the possible interactable components out
 		InteractiveObject targetInteractive = null;
 		ObjectPlacementVolume targetPlacement = null;
+		SceneTransitionZone targetTransitionZone = null;
 		if(target != null) {
 			targetInteractive = target.GetComponent<InteractiveObject>();
 			targetPlacement = target.GetComponent<ObjectPlacementVolume>();
-			if (targetInteractive != null)
+			targetTransitionZone = target.GetComponent<SceneTransitionZone>();
+			if (targetInteractive != null && targetInteractive.enabled)
 				targetInteractive.Highlight();
 		}
 
 		//Click behaviors
-		if (Input.GetMouseButtonDown(0)) {
-			if (targetInteractive != null && heldObject == null) {
-				if (targetInteractive.IsSpawner)
-				{
-					//Debug.Log("IsSpawner");
-					heldObject = targetInteractive.GenerateSpawnedObject();
+		if (!magnifyingGlass.isEnabled) {
+			if (Input.GetMouseButtonDown(0)) {
+				if (targetTransitionZone != null && targetTransitionZone.notNeedMagGlass){
+					transform.position = targetTransitionZone.target.spawnPoint;
 				}
-				else if (targetInteractive.InteractionIsHeld)
-					heldObject = targetInteractive;
-				//Debug.Log(heldObject.name);
-				targetInteractive.Interact(handTF);
-			}
-			else if(heldObject != null) {
-				if (targetPlacement != null) {
-					if (targetPlacement.requiredObject == heldObject.gameObject || heldObject.gameObject.tag == targetPlacement.requiredTag) {
-						heldObject.ReleaseTo(targetPlacement.transform);
-						targetPlacement.PlacementTrigger(heldObject);
-						heldObject = null;
-						return;
+
+				if (targetInteractive != null && heldObject == null) {
+					if (targetInteractive.IsSpawner) {
+						heldObject = targetInteractive.GenerateSpawnedObject();
 					}
+					else if (targetInteractive.InteractionIsHeld)
+						heldObject = targetInteractive;
+					targetInteractive.Interact(handTF);
 				}
-				heldObject.Release();
-				heldObject = null;
+				else if (heldObject != null) {
+					if (targetPlacement != null) {
+						if (targetPlacement.requiredObject == heldObject.gameObject || heldObject.gameObject.tag == targetPlacement.requiredTag) {
+							heldObject.ReleaseTo(targetPlacement.transform);
+							targetPlacement.PlacementTrigger(heldObject);
+							heldObject = null;
+							return;
+						}
+					}
+					heldObject.Release();
+					heldObject = null;
+				}
 			}
 		}
 	}
@@ -103,11 +108,11 @@ public class KeyboardPlayerController : MonoBehaviour {
 			camXRotation += mouseY * mouseSensitivity;
 			camTF.Rotate(new Vector3(mouseY * mouseSensitivity, 0, 0));
 		}
-		else if (camXRotation > 90 && mouseY < 0) {
+		else if (camXRotation >= 90 && mouseY < 0) {
 			camXRotation += mouseY * mouseSensitivity;
 			camTF.Rotate(new Vector3(mouseY * mouseSensitivity, 0, 0));
 		}
-		else if (camXRotation < -90 && mouseY > 0) {
+		else if (camXRotation <= -90 && mouseY > 0) {
 			camXRotation += mouseY * mouseSensitivity;
 			camTF.Rotate(new Vector3(mouseY * mouseSensitivity, 0, 0));
 		}

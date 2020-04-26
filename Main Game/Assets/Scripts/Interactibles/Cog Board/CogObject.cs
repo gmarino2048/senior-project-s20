@@ -10,6 +10,6 @@ public class CogObject : HoldableObject
 		transform.parent = placementPosition;
 		transform.localPosition = Vector3.zero;
 		transform.localRotation = Quaternion.identity;
-		GetComponent<Collider>().enabled = true;
+		GetComponent<Collider>().enabled = false;
 	}
 }

@@ -7,5 +7,5 @@ public abstract class ObjectPlacementVolume : MonoBehaviour {
 	public GameObject requiredObject;
 	public string requiredTag;
 
-	public abstract void PlacementTrigger(InteractiveObject gameObject);
+	public abstract void PlacementTrigger(InteractiveObject placedObject);
 }
