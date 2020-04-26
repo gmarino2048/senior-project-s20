@@ -117,6 +117,7 @@ namespace Visuals
         {
             _random = new System.Random(randomSeed);
             _campfireLights = new List<Light>(GetCampfireLights());
+            _lightIntensity = new List<float>();
             
             foreach (var light in _campfireLights)
             {
