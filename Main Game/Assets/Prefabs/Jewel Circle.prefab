@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4192464235662969708}
   - component: {fileID: 5750147657433655266}
   - component: {fileID: -2408168854082578296}
-  - component: {fileID: 2201365682950085721}
+  - component: {fileID: 1843576664175273799}
   m_Layer: 0
   m_Name: Jewel Circle
   m_TagString: Untagged
@@ -111,7 +111,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2201365682950085721
+--- !u!114 &1843576664175273799
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,10 +120,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2455154552755371952}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93f8e022c2e07ac42ad505343d394bfc, type: 3}
+  m_Script: {fileID: 11500000, guid: 35e88d6ca13ccc64bb2155624b419d88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAmount: 1.01
   InteractionIsHeld: 0
   IsSpawner: 0
   ObjectToSpawn: {fileID: 0}
+  linkedGem: {fileID: 0}
