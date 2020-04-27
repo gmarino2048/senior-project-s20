@@ -20,6 +20,9 @@ public class Cauldron : MonoBehaviour
 	private static Potion freezePotion = new Potion("freeze");
 	private static Potion explodePotion = new Potion("explode");
 
+    [SerializeField] private ParticleSystem successParticles;
+    [SerializeField] private ParticleSystem failureParticles;
+
 	private void Start()
 	{
 		SetUpPotion(corrosivePotion, Corrosive);
@@ -39,13 +42,13 @@ public class Cauldron : MonoBehaviour
 
 	private static List<Ingredient> currentBrew = new List<Ingredient>();
 
-	public static void AddIngredient(InteractiveObject ingredient)
+	public void AddIngredient(InteractiveObject ingredient)
 	{
 		currentBrew.Add(ingredient.GetComponent<IngredientObject>().GetIngredient());
 		CheckBrew();
 	}
 
-	private static void CheckBrew()
+	private void CheckBrew()
 	{
 		Potion currentPotion = new Potion("current potion");
 		// Only check the brew if we have 3 ingredients in th cauldron
@@ -60,33 +63,40 @@ public class Cauldron : MonoBehaviour
 		}
 	}
 
-	private static void BrewPotion(Potion currentPotion)
+	private void BrewPotion(Potion currentPotion)
 	{
 		Potion newPotion;
 		if (currentPotion.Equals(corrosivePotion))
 		{
 			newPotion = corrosivePotion;
+            successParticles.Play();
 		}
 		else if (currentPotion.Equals(growPlantPotion))
 		{
 			newPotion = growPlantPotion;
+            successParticles.Play();
 		}
 		else if (currentPotion.Equals(burnPotion))
 		{
 			newPotion = burnPotion;
+            successParticles.Play();
 		}
 		else if (currentPotion.Equals(freezePotion))
 		{
 			newPotion = freezePotion;
+            successParticles.Play();
 		}
 		else if (currentPotion.Equals(explodePotion))
 		{
 			newPotion = explodePotion;
+            successParticles.Play();
 		}
 		else
 		{
 			newPotion = new Potion("Bad potion");
+            failureParticles.Play();
 		}
+
 		Debug.Log("New potion is determined on line 87 of Couldron.cs: " + newPotion.name);
 		Brewed(newPotion.name);
 	}
