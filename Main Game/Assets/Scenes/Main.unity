@@ -1055,6 +1055,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Campfire Scene
       objectReference: {fileID: 0}
+    - target: {fileID: 6934838301941641489, guid: ddb6ab456d7294baeb6c9c8e1135fd70,
+        type: 3}
+      propertyPath: fadeDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6934838301941641489, guid: ddb6ab456d7294baeb6c9c8e1135fd70,
+        type: 3}
+      propertyPath: contemplationTime
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7582063617537768691, guid: ddb6ab456d7294baeb6c9c8e1135fd70,
         type: 3}
       propertyPath: m_LocalRotation.x
