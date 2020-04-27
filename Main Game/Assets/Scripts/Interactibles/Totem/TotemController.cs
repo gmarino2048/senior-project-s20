@@ -18,11 +18,14 @@ public class TotemController : MonoBehaviour
 
     [SerializeField] private float fadeDuration;
     [SerializeField] private float contemplationTime;
+
+    private GameFlowController flowController;
     private FadeController fadeController;
 
-    private void Start()
+    private void Awake()
     {
         fadeController = FindObjectOfType<FadeController>();
+        flowController = FindObjectOfType<GameFlowController>();
     }
 
     public void AddGem(GemColor color)
@@ -43,14 +46,6 @@ public class TotemController : MonoBehaviour
         }
 
         if (_red && _green && _blue)
-            StartCoroutine(EndGame());
-    }
-
-    private IEnumerator EndGame()
-    {
-        yield return fadeController.FadeOut(Color.white, fadeDuration);
-        Debug.Log("Game has ended. Thanks for playing!");
-        yield return new WaitForSeconds(contemplationTime);
-        Application.Quit(0);
+            StartCoroutine(flowController.EndGame());
     }
 }
