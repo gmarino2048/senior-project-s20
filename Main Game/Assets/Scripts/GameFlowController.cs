@@ -8,6 +8,7 @@ public class GameFlowController : MonoBehaviour
     [SerializeField] private ScenicCameraRig cameraRig;
     [SerializeField] private MenuController menu;
     private Camera scenicCamera;
+    private Canvas canvas;
 
     [Header("Player Settings")]
     [SerializeField] private KeyboardPlayerController player;
@@ -23,6 +24,7 @@ public class GameFlowController : MonoBehaviour
     {
         scenicCamera = cameraRig.GetComponentInChildren<Camera>();
         playerCamera = player.GetComponentInChildren<Camera>();
+        canvas = menu.GetComponent<Canvas>();
         
         initialPlayerTransform = player.gameObject.transform;
 
@@ -40,7 +42,7 @@ public class GameFlowController : MonoBehaviour
 
         cameraRig.active = false;
         scenicCamera.enabled = false;
-        
+
         player.SetPlayerMovementLock(false);
     }
 
@@ -48,7 +50,7 @@ public class GameFlowController : MonoBehaviour
     {
         cameraRig.active = true;
         scenicCamera.enabled = true;
-        
+
         playerCamera.enabled = false;
         
         player.SetPlayerMovementLock(true);
@@ -63,6 +65,7 @@ public class GameFlowController : MonoBehaviour
 
     public IEnumerator StartGame()
     {
+        canvas.enabled = false;
         yield return fadeController.FadeOut(Color.black, fadeDuration);
         SwitchToPlayer();
         yield return fadeController.FadeIn(fadeDuration);
@@ -76,5 +79,6 @@ public class GameFlowController : MonoBehaviour
         SwitchToMenu();
         ResetPlayer();
         yield return fadeController.FadeIn(fadeDuration);
+        canvas.enabled = true;
     }
 }
