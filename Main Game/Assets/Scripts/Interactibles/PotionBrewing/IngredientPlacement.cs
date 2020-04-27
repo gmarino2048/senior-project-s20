@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class IngredientPlacement : ObjectPlacementVolume
 {
+	[SerializeField] private Cauldron cauldron;
 	public override void PlacementTrigger(InteractiveObject ingredient)
 	{
-		Cauldron.AddIngredient(ingredient);
+		cauldron.AddIngredient(ingredient);
 		StartCoroutine(PlacementAnimation(ingredient));
 	}
 
