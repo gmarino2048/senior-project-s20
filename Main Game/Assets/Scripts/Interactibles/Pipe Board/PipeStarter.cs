@@ -20,8 +20,10 @@ public class PipeStarter : PipeSegment {
 	}
 
 	public override void OnMouseDown() {
-		if(!flowing && waterCanFlow)
+		if (!flowing && waterCanFlow) {
 			StartCoroutine(FlowThrough(null));
+			StartCoroutine(TurnLever());
+		}
 	}
 
 	public override IEnumerator FlowThrough(PipeEndpoint input) {
@@ -33,15 +35,15 @@ public class PipeStarter : PipeSegment {
 
 	public override IEnumerator FlowBack(PipeEndpoint input) {
 		yield return new WaitForSeconds(flowThroughTime / 4);
-		isShaking = false;
 		flowing = false;
+		StartCoroutine(TurnLever());
 	}
 
 	private IEnumerator TurnLever() {
 		float timer = 0;
 		while (timer < leverTurnDuration) {
 			timer += Time.deltaTime;
-			leverTF.Rotate(new Vector3(0, 0, (Time.deltaTime / leverTurnDuration) * leverTurnAngle));
+			leverTF.Rotate(new Vector3((Time.deltaTime / leverTurnDuration) * leverTurnAngle, 0, 0));
 			yield return new WaitForEndOfFrame();
 		}
 		leverTurnAngle *= -1;
