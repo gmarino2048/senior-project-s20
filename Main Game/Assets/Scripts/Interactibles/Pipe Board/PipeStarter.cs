@@ -23,6 +23,7 @@ public class PipeStarter : PipeSegment {
 		if (!flowing && waterCanFlow) {
 			StartCoroutine(FlowThrough(null));
 			StartCoroutine(TurnLever());
+			isShaking = false;
 		}
 	}
 
@@ -35,6 +36,7 @@ public class PipeStarter : PipeSegment {
 
 	public override IEnumerator FlowBack(PipeEndpoint input) {
 		yield return new WaitForSeconds(flowThroughTime / 4);
+		isShaking = true;
 		flowing = false;
 		StartCoroutine(TurnLever());
 	}
