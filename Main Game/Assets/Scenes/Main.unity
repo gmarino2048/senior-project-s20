@@ -1343,6 +1343,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -3.947
       objectReference: {fileID: 0}
+    - target: {fileID: 3865234333443644405, guid: ac702a270b5559c48b5bae7731046ce4,
+        type: 3}
+      propertyPath: gemPrison
+      value: 
+      objectReference: {fileID: 1609973515}
     - target: {fileID: 3910665882259065358, guid: ac702a270b5559c48b5bae7731046ce4,
         type: 3}
       propertyPath: m_LocalPosition.y
