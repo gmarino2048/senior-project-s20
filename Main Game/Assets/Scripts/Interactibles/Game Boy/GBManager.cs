@@ -14,7 +14,9 @@ public class GBManager : MonoBehaviour {
 	public void TurnOn(bool turnOn) {
 		player.enabled = turnOn;
 		//gameScreen.SetActive(turnOn);
-		foreach (GBBobo bobo in bobos)
-			bobo.enabled = turnOn;
+		try {
+			foreach (GBBobo bobo in bobos)
+				bobo.enabled = turnOn;
+		} catch (MissingReferenceException e) { }
 	}
 }
