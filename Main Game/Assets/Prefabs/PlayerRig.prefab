@@ -357,6 +357,8 @@ MonoBehaviour:
   colorScreen: {fileID: 5883699043423037348}
   handTF: {fileID: 75122920198844233}
   objectDropPoint: {fileID: 8951000465996677935}
+  crouchDistance: 0.75
+  crouchDuration: 0.25
 --- !u!114 &5057285787087974612
 MonoBehaviour:
   m_ObjectHideFlags: 0

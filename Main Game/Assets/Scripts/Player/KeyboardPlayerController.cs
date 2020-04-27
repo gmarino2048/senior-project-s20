@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 [RequireComponent(typeof(Rigidbody))]
 //Now this is the only type of playercontroller :(
@@ -29,9 +30,18 @@ public class KeyboardPlayerController : MonoBehaviour {
 	[SerializeField]
 	private static bool hasMagnifyingGlass = false;
 
+	private float camStandHeight;
+	[SerializeField] private float crouchDistance;
+	[SerializeField] private float crouchDuration;
+	private Coroutine crouchingCoroutine;
+	private float standingSpeed, crouchingSpeed;
+
 	void Start() {
 		rb = GetComponent<Rigidbody>();
 		camTF = Camera.main.transform;
+		camStandHeight = camTF.localPosition.y;
+		standingSpeed = speed;
+		crouchingSpeed = speed * 0.5f;
 		magnifyingGlass = GetComponentInChildren<MagnifyingGlassManager>();
 
 		Cursor.lockState = CursorLockMode.Locked;
@@ -50,6 +60,19 @@ public class KeyboardPlayerController : MonoBehaviour {
 			//Bound to 'q' since it's convenient and shaped the most like a magnifying glass
 			if (hasMagnifyingGlass && Input.GetKeyDown(KeyCode.Q)) {
 				magnifyingGlass.Toggle();
+			}
+
+			if (Input.GetKeyDown(KeyCode.LeftControl)) {
+				if(crouchingCoroutine != null)
+					StopCoroutine(crouchingCoroutine);
+				speed = crouchingSpeed;
+				crouchingCoroutine = StartCoroutine(Crouch(camStandHeight - crouchDistance));
+			}
+			else if (Input.GetKeyUp(KeyCode.LeftControl)) {
+				if (crouchingCoroutine != null)
+					StopCoroutine(crouchingCoroutine);
+				speed = standingSpeed;
+				crouchingCoroutine = StartCoroutine(Crouch(camStandHeight));
 			}
 		}
 	}
@@ -182,6 +205,19 @@ public class KeyboardPlayerController : MonoBehaviour {
 		colorScreen.CrossFadeAlpha(1, fadeInTime, true);
 		yield return new WaitForSeconds(fadeInTime + 0.5f	);
 		colorScreen.CrossFadeAlpha(0, fadeOutTime, true);
+	}
+
+	private IEnumerator Crouch(float goalHeight) {
+		float newHeight;
+		float startHeight = camTF.localPosition.y;
+		float timer = 0;
+
+		while (timer < crouchDuration) {
+			newHeight = Mathf.Lerp(startHeight, goalHeight, timer / crouchDuration);
+			camTF.localPosition = new Vector3(0, newHeight, 0);
+			timer += Time.deltaTime;
+			yield return new WaitForEndOfFrame();
+		}
 	}
 
 	public static void ActivateMagnifyingGlass()
