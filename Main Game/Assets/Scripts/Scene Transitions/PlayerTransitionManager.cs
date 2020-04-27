@@ -18,6 +18,7 @@ public class PlayerTransitionManager : MonoBehaviour
 		// Initialize elements
 		_playerCamera = gameObject.GetComponentInChildren<Camera>();
 		_magnifyingGlass = gameObject.GetComponentInChildren<MagnifyingGlassManager>();
+		_campfire = FindObjectOfType<Flicker>();
 	}
 
 	// Update is called once per frame
