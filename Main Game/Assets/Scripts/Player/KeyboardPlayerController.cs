@@ -15,7 +15,7 @@ public class KeyboardPlayerController : MonoBehaviour {
 	private float camXRotation; //Used to keep the camera from flipping over vertically
 	public float mouseSensitivity;
 	[SerializeField] private GameObject reticle;
-	[SerializeField] private Image colorScreen;
+	private FadeController fadeController;
 
 	private Rigidbody rb;
 	private MagnifyingGlassManager magnifyingGlass;
@@ -46,8 +46,8 @@ public class KeyboardPlayerController : MonoBehaviour {
 
 		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
-		colorScreen.color = Color.black;
-		colorScreen.CrossFadeAlpha(0, 0, true);
+		fadeController = FindObjectOfType<FadeController>();
+		fadeController.SetTransparent();
 	}
 
 	//Only used for camera movement
@@ -200,11 +200,11 @@ public class KeyboardPlayerController : MonoBehaviour {
 		transform.position = spawnPoint.position;
 	}
 
-	public IEnumerator ScreenFade(float fadeInTime, float fadeOutTime, Color screenColor){
-		colorScreen.color = screenColor;
-		colorScreen.CrossFadeAlpha(1, fadeInTime, true);
-		yield return new WaitForSeconds(fadeInTime + 0.5f	);
-		colorScreen.CrossFadeAlpha(0, fadeOutTime, true);
+	public IEnumerator ScreenFade(float fadeOutTime, float fadeInTime, Color screenColor)
+	{
+		yield return fadeController.FadeOut(screenColor, fadeOutTime);
+		yield return new WaitForSeconds(0.5f);
+		yield return fadeController.FadeIn(fadeInTime);
 	}
 
 	private IEnumerator Crouch(float goalHeight) {
