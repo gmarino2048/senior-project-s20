@@ -22,6 +22,7 @@ public class PlayerTransitionManager : MonoBehaviour
 		playerCamera = gameObject.GetComponentInChildren<Camera>();
 		magnifyingGlass = gameObject.GetComponentInChildren<MagnifyingGlassManager>();
 		fadeController = FindObjectOfType<FadeController>();
+		campfire = FindObjectOfType<Flicker>();
 	}
 
 	// Update is called once per frame
