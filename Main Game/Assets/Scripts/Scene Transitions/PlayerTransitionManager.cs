@@ -18,7 +18,7 @@ public class PlayerTransitionManager : MonoBehaviour
 	// Start is called before the first frame update
 	private void Start()
 	{
-		// Initialize elements
+		// Initialize element
 		playerCamera = gameObject.GetComponentInChildren<Camera>();
 		magnifyingGlass = gameObject.GetComponentInChildren<MagnifyingGlassManager>();
 		fadeController = FindObjectOfType<FadeController>();
