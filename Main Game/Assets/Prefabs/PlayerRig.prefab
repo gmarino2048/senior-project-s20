@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 75122920532399745}
   - component: {fileID: 75122920532399744}
   - component: {fileID: 5057285787087974612}
+  - component: {fileID: 8070481661996348477}
   m_Layer: 2
   m_Name: Player
   m_TagString: Untagged
@@ -354,7 +355,6 @@ MonoBehaviour:
   raycastRange: 2.5
   mouseSensitivity: 1.75
   reticle: {fileID: 4246176902398630522}
-  colorScreen: {fileID: 5883699043423037348}
   handTF: {fileID: 75122920198844233}
   objectDropPoint: {fileID: 8951000465996677935}
   crouchDistance: 0.75
@@ -371,6 +371,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ad2a4ac977b64450ba0b13cd1afaa39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeDuration: 0
+--- !u!114 &8070481661996348477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75122920532399771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ca93533560774c1eb99fdf2655ad2f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blackoutSquare: {fileID: 5883699043423037348}
 --- !u!1 &75122920693526339
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,6 +552,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 75122920693526348}
     m_Modifications:
+    - target: {fileID: 20245210147349304, guid: f63e07cda2981f3408f45777a71004f3,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 3840
+      objectReference: {fileID: 0}
+    - target: {fileID: 20245210147349304, guid: f63e07cda2981f3408f45777a71004f3,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 2160
+      objectReference: {fileID: 0}
     - target: {fileID: 58692645811784099, guid: f63e07cda2981f3408f45777a71004f3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -642,6 +666,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 58692645811784109, guid: f63e07cda2981f3408f45777a71004f3,
+        type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 58692645811784111, guid: f63e07cda2981f3408f45777a71004f3,
         type: 3}
