@@ -459,6 +459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c2919c3398df514ab3d47d38829b65a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 4593384730354297281}
 --- !u!1 &4593384729046633199
 GameObject:
   m_ObjectHideFlags: 0
@@ -4029,6 +4030,7 @@ MonoBehaviour:
   jumpForce: {x: 0, y: 150, z: 0}
   leftFoot: {fileID: 4593384729881856043}
   rightFoot: {fileID: 4593384730035800306}
+  scroller: {fileID: 1598644285691995192}
   idle: {fileID: 21300000, guid: f7b40c6deba161c4583074a2d75d98d9, type: 3}
   walk1: {fileID: 6804696342634569545, guid: f79bc049d5ab8e14b93aec92bc46c800, type: 3}
   walk2: {fileID: 6922414971398233033, guid: f79bc049d5ab8e14b93aec92bc46c800, type: 3}

@@ -12,7 +12,7 @@ public class GBPlayerController : MonoBehaviour {
 	private float jumpTimer;
 
 	private Rigidbody2D rb;
-	private GBEdgeScroller scroller;
+	[SerializeField] private GBEdgeScroller scroller;
 
 	private Vector2 spawnPos;
 
@@ -32,7 +32,6 @@ public class GBPlayerController : MonoBehaviour {
 		rb = GetComponent<Rigidbody2D>();
 		playerSprite = GetComponent<SpriteRenderer>();
 		spawnPos = transform.position;
-		scroller = FindObjectOfType<GBEdgeScroller>();
 	}
 
 	private void FixedUpdate() {

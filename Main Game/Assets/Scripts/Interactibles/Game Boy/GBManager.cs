@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GBManager : MonoBehaviour {
-	private GBBobo[] bobos;
-	private GBPlayerController player;
+	[SerializeField] private GBBobo[] bobos;
+	[SerializeField] private GBPlayerController player;
 
-	void Start() {
-		bobos = GetComponentsInChildren<GBBobo>();
-		player = GetComponentInChildren<GBPlayerController>();
+	void OnEnable() {
+		foreach (GBBobo bobo in bobos)
+			bobo.enabled = false;
 	}
 
 	public void TurnOn(bool turnOn) {
 		player.enabled = turnOn;
+		//gameScreen.SetActive(turnOn);
 		foreach (GBBobo bobo in bobos)
 			bobo.enabled = turnOn;
 	}

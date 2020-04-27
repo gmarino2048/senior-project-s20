@@ -12,7 +12,7 @@ public class GBBobo : MonoBehaviour {
 	private AudioSource bounceSound;
 	[SerializeField] private Collider2D physicalCollider;
 
-	void Start() {
+	void OnEnable() {
 		mySprite = GetComponent<SpriteRenderer>();
 		bounceSound = GetComponent<AudioSource>();
 		//Reverses it since it flips around as soon as it touches the ground
