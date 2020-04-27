@@ -1,48 +1,76 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GBPlayerController : MonoBehaviour {
 	public float moveSpeed;
-
 	//For jumping:
 	public Vector3 jumpForce;
 	[SerializeField] private Transform leftFoot, rightFoot;
 	private float coyoteTimer;
 
-	private Rigidbody rb;
+	private Rigidbody2D rb;
+	private GBEdgeScroller scroller;
 
 	private bool isActive = false;
+	private Vector2 spawnPos;
+
+	[Header("Sprites")]
+	[SerializeField] private Sprite idle;
+	[SerializeField] private Sprite walk1, walk2, jump;
+	private SpriteRenderer playerSprite;
+	private bool onSprite1 = true;
+	[SerializeField] private float walkAnimSpeed;
+	private float walkAnimTimer;
+
+	[Header("SFX")]
+	[SerializeField] private AudioSource jumpSound;
+	[SerializeField] private AudioSource hurtSound, coinSound;
 
 	private void Start() {
-		rb = GetComponent<Rigidbody>();
+		rb = GetComponent<Rigidbody2D>();
+		playerSprite = GetComponent<SpriteRenderer>();
+		spawnPos = transform.position;
+		scroller = FindObjectOfType<GBEdgeScroller>();
 	}
 
 	private void FixedUpdate() {
 		Vector3 position = transform.position;
-		float newX = position.x;
 		bool canJump = updateGrounded();
 
 		if (isActive) {
 			if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) {
-				newX -= moveSpeed;
+				transform.Translate(new Vector2(-moveSpeed * Time.deltaTime, 0));
+				playerSprite.flipX = true;
+				RunWalkCycle();
 			}
-			if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) {
-				newX += moveSpeed;
+			else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) {
+				transform.Translate(new Vector2(moveSpeed * Time.deltaTime, 0));
+				playerSprite.flipX = false;
+				RunWalkCycle();
 			}
-			transform.position = new Vector3(newX, position.y, position.z);
-
+			else {
+				playerSprite.sprite = idle;
+			}
+			
+			
 			if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) {
 				if (canJump) {
 					coyoteTimer = 0;
 					rb.AddForce(jumpForce);
+					jumpSound.Play();
 				}
 			}
+		}
+
+		if (!canJump) {
+			playerSprite.sprite = jump;
 		}
 	}
 
 	private bool updateGrounded() {
-		if (Physics.Raycast(leftFoot.position, -transform.up, 0.01f) || Physics.Raycast(rightFoot.position, -transform.up, 0.01f)) {
+		if ((Physics2D.Raycast(leftFoot.position, -transform.up, 0.01f).collider != null) || (Physics2D.Raycast(rightFoot.position, -transform.up, 0.01f).collider != null)) {
 			return true;
 		}
 		//Gives a bit of leeway when running off platforms 
@@ -51,6 +79,27 @@ public class GBPlayerController : MonoBehaviour {
 			return true;
 
 		return false;
+	}
+
+	private void RunWalkCycle() {
+		walkAnimTimer -= Time.deltaTime;
+		if (walkAnimTimer < 0) {
+			walkAnimTimer = walkAnimSpeed;
+			if (onSprite1)
+				playerSprite.sprite = walk2;
+			else
+				playerSprite.sprite = walk1;
+			onSprite1 = !onSprite1;
+		}
+	}
+
+	public void Kill() {
+		scroller.Respawn();
+		transform.position = spawnPos;
+		hurtSound.Play();
+	}
+	public void GetCoin() {
+		coinSound.Play();
 	}
 
 	public void SetControlState(bool cubeIsActive) {
