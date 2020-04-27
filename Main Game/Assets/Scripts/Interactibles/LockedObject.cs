@@ -5,6 +5,7 @@ using UnityEngine;
 public class LockedObject : ObjectPlacementVolume
 {
 	public GameObject toActivate;
+	public GameObject toDeactivate;
 
 	public override void PlacementTrigger(InteractiveObject placedObject)
 	{
@@ -12,6 +13,7 @@ public class LockedObject : ObjectPlacementVolume
 		{
 			gameObject.SetActive(false);
 			toActivate.SetActive(true);
+			toDeactivate.SetActive(false);
 		}
 	}
 }

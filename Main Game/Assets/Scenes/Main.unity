@@ -560,6 +560,11 @@ PrefabInstance:
       propertyPath: requiredObject
       value: 
       objectReference: {fileID: 1760539482}
+    - target: {fileID: 8531214385399863775, guid: 2e5481f36edcba1439966a29b4a09df9,
+        type: 3}
+      propertyPath: toDeactivate
+      value: 
+      objectReference: {fileID: 1760539483}
     - target: {fileID: 9040609099538113103, guid: 2e5481f36edcba1439966a29b4a09df9,
         type: 3}
       propertyPath: target
@@ -1242,6 +1247,12 @@ PrefabInstance:
 --- !u!1 &1760539482 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2066646009719321839, guid: 5a805f21f5a215147b09e386f67ba237,
+    type: 3}
+  m_PrefabInstance: {fileID: 1760539481}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1760539483 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1318938497194310703, guid: 5a805f21f5a215147b09e386f67ba237,
     type: 3}
   m_PrefabInstance: {fileID: 1760539481}
   m_PrefabAsset: {fileID: 0}
