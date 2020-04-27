@@ -8,25 +8,29 @@ using Visuals;
 
 public class PlayerTransitionManager : MonoBehaviour
 {
-	private Camera _playerCamera;
-	private MagnifyingGlassManager _magnifyingGlass;
-	private Flicker _campfire;
+	private Camera playerCamera;
+	private MagnifyingGlassManager magnifyingGlass;
+	private Flicker campfire;
+
+	[SerializeField] private float fadeDuration;
+	private FadeController fadeController;
 
 	// Start is called before the first frame update
 	private void Start()
 	{
 		// Initialize elements
-		_playerCamera = gameObject.GetComponentInChildren<Camera>();
-		_magnifyingGlass = gameObject.GetComponentInChildren<MagnifyingGlassManager>();
+		playerCamera = gameObject.GetComponentInChildren<Camera>();
+		magnifyingGlass = gameObject.GetComponentInChildren<MagnifyingGlassManager>();
+		fadeController = FindObjectOfType<FadeController>();
 	}
 
 	// Update is called once per frame
 	private void Update()
 	{
 		// If mag glass enabled, cast out from camera
-		if (_magnifyingGlass.isEnabled)
+		if (magnifyingGlass.isEnabled)
 		{
-			var cameraTransform = _playerCamera.transform;
+			var cameraTransform = playerCamera.transform;
 
 			// Maybe I could do this with triggers
 			// Better stick to what I know for now
@@ -43,27 +47,35 @@ public class PlayerTransitionManager : MonoBehaviour
 
 				if (sceneTransition == null)
 				{
-					_magnifyingGlass.SetTransitionDisabled();
+					magnifyingGlass.SetTransitionDisabled();
 					return;
 				}
 				
-				_magnifyingGlass.SetTransitionEnabled();
+				magnifyingGlass.SetTransitionEnabled();
 
 				// Grab primary mouse button
-				if (Input.GetMouseButtonDown(0)) {
-					gameObject.transform.position = sceneTransition.target.spawnPoint;
-					_campfire.ResetIntensity();
+				if (Input.GetMouseButtonDown(0))
+				{
+					StartCoroutine(DoTransition(sceneTransition));
+					campfire.ResetIntensity();
 				}
 			}
 			else
 			{
-				_magnifyingGlass.SetTransitionDisabled();
+				magnifyingGlass.SetTransitionDisabled();
 			}
 		}
 		else
 		{
 			// Maybe I should remove this for performance?
-			_magnifyingGlass.SetTransitionDisabled();
+			magnifyingGlass.SetTransitionDisabled();
 		}
+	}
+
+	private IEnumerator DoTransition(SceneTransitionZone sceneTransition)
+	{
+		yield return fadeController.FadeOut(Color.black, fadeDuration);
+		gameObject.transform.position = sceneTransition.target.spawnPoint;
+		yield return fadeController.FadeIn(fadeDuration);
 	}
 }
