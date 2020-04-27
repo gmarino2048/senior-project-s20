@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6859578310069087022}
   - component: {fileID: 803801749372878320}
   - component: {fileID: 5339365949962830897}
-  - component: {fileID: 3235070272484799380}
+  - component: {fileID: 6085376629834878583}
   m_Layer: 0
   m_Name: Jewel Square
   m_TagString: Untagged
@@ -111,7 +111,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3235070272484799380
+--- !u!114 &6085376629834878583
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,10 +120,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5120249924469284850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93f8e022c2e07ac42ad505343d394bfc, type: 3}
+  m_Script: {fileID: 11500000, guid: 35e88d6ca13ccc64bb2155624b419d88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAmount: 1.01
   InteractionIsHeld: 0
   IsSpawner: 0
   ObjectToSpawn: {fileID: 0}
+  linkedGem: {fileID: 0}

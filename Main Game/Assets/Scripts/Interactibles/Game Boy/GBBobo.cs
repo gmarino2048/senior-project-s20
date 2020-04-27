@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public class GBBobo : MonoBehaviour {
 	[SerializeField] private Collider2D physicalCollider;
 
 	void OnEnable() {
+		Debug.Log("bobob bounce");
 		mySprite = GetComponent<SpriteRenderer>();
 		bounceSound = GetComponent<AudioSource>();
 		//Reverses it since it flips around as soon as it touches the ground
@@ -54,7 +56,9 @@ public class GBBobo : MonoBehaviour {
 		walkAnimTimer -= Time.deltaTime;
 		if (walkAnimTimer < 0) {
 			walkAnimTimer = walkAnimSpeed;
-			mySprite.flipX = !mySprite.flipX;
+			try {
+				mySprite.flipX = !mySprite.flipX;
+			} catch (NullReferenceException e) { }
 		}
 	}
 }
