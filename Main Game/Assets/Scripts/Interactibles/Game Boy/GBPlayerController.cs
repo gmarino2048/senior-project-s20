@@ -9,11 +9,11 @@ public class GBPlayerController : MonoBehaviour {
 	public Vector3 jumpForce;
 	[SerializeField] private Transform leftFoot, rightFoot;
 	private float coyoteTimer;
+	private float jumpTimer;
 
 	private Rigidbody2D rb;
 	private GBEdgeScroller scroller;
 
-	private bool isActive = false;
 	private Vector2 spawnPos;
 
 	[Header("Sprites")]
@@ -37,40 +37,46 @@ public class GBPlayerController : MonoBehaviour {
 
 	private void FixedUpdate() {
 		Vector3 position = transform.position;
-		bool canJump = updateGrounded();
 
-		if (isActive) {
-			if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) {
-				transform.Translate(new Vector2(-moveSpeed * Time.deltaTime, 0));
-				playerSprite.flipX = true;
-				RunWalkCycle();
-			}
-			else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) {
-				transform.Translate(new Vector2(moveSpeed * Time.deltaTime, 0));
-				playerSprite.flipX = false;
-				RunWalkCycle();
-			}
-			else {
-				playerSprite.sprite = idle;
-			}
-			
-			
+		if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) {
+			transform.Translate(new Vector2(-moveSpeed * Time.deltaTime, 0));
+			playerSprite.flipX = true;
+			RunWalkCycle();
+		}
+		else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) {
+			transform.Translate(new Vector2(moveSpeed * Time.deltaTime, 0));
+			playerSprite.flipX = false;
+			RunWalkCycle();
+		}
+		else {
+			playerSprite.sprite = idle;
+		}
+
+		
+	}
+
+	//Only for jumping
+	private void Update() {
+		if (jumpTimer < 0) {
+			bool canJump = updateGrounded();
+
 			if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) {
 				if (canJump) {
+					jumpTimer = 0.1f;
 					coyoteTimer = 0;
 					rb.AddForce(jumpForce);
 					jumpSound.Play();
 				}
 			}
+			if (!canJump)
+				playerSprite.sprite = jump;
 		}
-
-		if (!canJump) {
-			playerSprite.sprite = jump;
-		}
+		else
+			jumpTimer -= Time.deltaTime;
 	}
 
 	private bool updateGrounded() {
-		if ((Physics2D.Raycast(leftFoot.position, -transform.up, 0.01f).collider != null) || (Physics2D.Raycast(rightFoot.position, -transform.up, 0.01f).collider != null)) {
+		if ((Physics2D.Raycast(leftFoot.position, -transform.up, 0.05f).collider != null) || (Physics2D.Raycast(rightFoot.position, -transform.up, 0.05f).collider != null)) {
 			return true;
 		}
 		//Gives a bit of leeway when running off platforms 
@@ -100,9 +106,5 @@ public class GBPlayerController : MonoBehaviour {
 	}
 	public void GetCoin() {
 		coinSound.Play();
-	}
-
-	public void SetControlState(bool cubeIsActive) {
-		isActive = cubeIsActive;
 	}
 }

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GBFocusManager : PuzzleFocusManager {
-	[SerializeField] private GBPlayerController gbController;
+	[SerializeField] private GBManager manager;
 
 	public override void ToggleState(bool enable) {
 		base.ToggleState(enable);
-		gbController.SetControlState(enable);
+		manager.TurnOn(enable);
 	}
 }

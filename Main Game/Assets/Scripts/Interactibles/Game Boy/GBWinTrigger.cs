@@ -12,8 +12,8 @@ public class GBWinTrigger : MonoBehaviour {
 		focuser = FindObjectOfType<GBFocusManager>();
 	}
 
-	private void OnTriggerEnter(Collider other) {
-		if(other.gameObject.GetComponent<GBPlayerController>() != null) {
+	private void OnTriggerEnter2D(Collider2D collision) {
+		if (collision.gameObject.GetComponent<GBPlayerController>() != null) {
 			winScreen.SetActive(true);
 			focuser.ToggleState(false);
 			windowController.Open();
