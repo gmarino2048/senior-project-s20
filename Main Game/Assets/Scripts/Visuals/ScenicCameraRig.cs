@@ -1,18 +1,21 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ScenicCameraRig : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private float rotationSpeed;
+    public bool active;
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (active)
+        {
+            gameObject.transform.RotateAround(
+                gameObject.transform.localPosition, 
+                Vector3.up,
+                rotationSpeed * Time.deltaTime);
+        }
     }
 }
