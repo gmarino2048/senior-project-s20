@@ -1,10 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PipeStarter : PipeSegment {
 	private bool flowing;
 	private bool waterCanFlow;
+	[SerializeField] private float leverTurnDuration, leverTurnAngle;
+	[SerializeField] private Transform leverTF;
 
 	protected override void Start() {
 		base.Start();
@@ -17,8 +20,11 @@ public class PipeStarter : PipeSegment {
 	}
 
 	public override void OnMouseDown() {
-		if(!flowing && waterCanFlow)
+		if (!flowing && waterCanFlow) {
 			StartCoroutine(FlowThrough(null));
+			StartCoroutine(TurnLever());
+			isShaking = false;
+		}
 	}
 
 	public override IEnumerator FlowThrough(PipeEndpoint input) {
@@ -30,7 +36,18 @@ public class PipeStarter : PipeSegment {
 
 	public override IEnumerator FlowBack(PipeEndpoint input) {
 		yield return new WaitForSeconds(flowThroughTime / 4);
-		isShaking = false;
+		isShaking = true;
 		flowing = false;
+		StartCoroutine(TurnLever());
+	}
+
+	private IEnumerator TurnLever() {
+		float timer = 0;
+		while (timer < leverTurnDuration) {
+			timer += Time.deltaTime;
+			leverTF.Rotate(new Vector3((Time.deltaTime / leverTurnDuration) * leverTurnAngle, 0, 0));
+			yield return new WaitForEndOfFrame();
+		}
+		leverTurnAngle *= -1;
 	}
 }

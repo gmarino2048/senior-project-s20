@@ -5,14 +5,16 @@ using UnityEngine;
 public class BurnableObject : PotionInteractionObject {
 	[SerializeField] GameObject[] burnableChildren;
 	[SerializeField] ParticleSystem[] flameParticles;
+	private AudioSource burnSound;
 
 	void Start() {
 		requiredEffect = PotionType.Fire;
+		burnSound = GetComponent<AudioSource>();
 	}
 
 	public override IEnumerator PotionEffects() {
-		Debug.Log("Parent called");
 		float partSysDuration = flameParticles[0].main.duration;
+		burnSound.Play();
 
 		foreach (ParticleSystem ps in flameParticles)
 			ps.Play();

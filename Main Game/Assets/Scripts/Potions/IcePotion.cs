@@ -34,6 +34,8 @@ public class IcePotion : PotionItem {
 	protected override IEnumerator Shatter() {
 		glassParticles.Play();
 		splashParticles.Play();
+		glassBreak.Play();
+		effectSound.Play();
 		rb.isKinematic = true;
 		glowLight.intensity = brokenLightIntensity;
 		GetComponent<MeshRenderer>().enabled = false;
