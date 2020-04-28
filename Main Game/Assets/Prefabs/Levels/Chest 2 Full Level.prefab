@@ -338,7 +338,7 @@ MonoBehaviour:
   requiredEffect: 1
   waterPlane: {fileID: 6024636163652357121}
   objectToDestroy: {fileID: 0}
-  raiseHeight: 1.5
+  raiseHeight: 1.35
   raiseDuration: 3
 --- !u!1 &2898930929932321474
 GameObject:

@@ -21,7 +21,9 @@ public class Cauldron : MonoBehaviour
 	private static Potion explodePotion = new Potion("explode");
 
     [SerializeField] private ParticleSystem successParticles;
+	[SerializeField] private AudioSource successSound;
     [SerializeField] private ParticleSystem failureParticles;
+	[SerializeField] private AudioSource failureSound;
 
 	private void Start()
 	{
@@ -70,31 +72,37 @@ public class Cauldron : MonoBehaviour
 		{
 			newPotion = corrosivePotion;
             successParticles.Play();
+			successSound.Play();
 		}
 		else if (currentPotion.Equals(growPlantPotion))
 		{
 			newPotion = growPlantPotion;
             successParticles.Play();
+			successSound.Play();
 		}
 		else if (currentPotion.Equals(burnPotion))
 		{
 			newPotion = burnPotion;
             successParticles.Play();
+			successSound.Play();
 		}
 		else if (currentPotion.Equals(freezePotion))
 		{
 			newPotion = freezePotion;
             successParticles.Play();
+			successSound.Play();
 		}
 		else if (currentPotion.Equals(explodePotion))
 		{
 			newPotion = explodePotion;
             successParticles.Play();
+			successSound.Play();
 		}
 		else
 		{
 			newPotion = new Potion("Bad potion");
             failureParticles.Play();
+			failureSound.Play();
 		}
 
 		Debug.Log("New potion is determined on line 87 of Couldron.cs: " + newPotion.name);

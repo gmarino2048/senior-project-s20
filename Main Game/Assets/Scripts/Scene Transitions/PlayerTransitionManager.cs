@@ -15,6 +15,8 @@ public class PlayerTransitionManager : MonoBehaviour
 	[SerializeField] private float fadeDuration;
 	private FadeController fadeController;
 
+	[SerializeField] private AudioSource zoomSound;
+
 	// Start is called before the first frame update
 	private void Start()
 	{
@@ -75,6 +77,7 @@ public class PlayerTransitionManager : MonoBehaviour
 
 	private IEnumerator DoTransition(SceneTransitionZone sceneTransition)
 	{
+		zoomSound.Play();
 		yield return fadeController.FadeOut(Color.black, fadeDuration);
 		gameObject.transform.position = sceneTransition.target.spawnPoint;
 		yield return fadeController.FadeIn(fadeDuration);

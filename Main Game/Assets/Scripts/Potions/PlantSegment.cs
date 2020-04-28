@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlantSegment : PotionInteractionObject {
 	private PlantManager parentManager;
 	[SerializeField] private ParticleSystem growthParticles, burnParticles;
+	[SerializeField] private AudioSource growthSound, burnSound;
 
 	void Start() {
 		parentManager = GetComponentInParent<PlantManager>();
@@ -26,6 +27,10 @@ public class PlantSegment : PotionInteractionObject {
 
 	public IEnumerator PotionEffects(bool isGrowing) {
 		ParticleSystem activePS = isGrowing ? growthParticles : burnParticles;
+		if (isGrowing)
+			growthSound.Play();
+		else
+			burnSound.Play();
 
 		activePS.Play();
 		yield return new WaitForSeconds(activePS.main.duration);

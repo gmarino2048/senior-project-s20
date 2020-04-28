@@ -7,12 +7,15 @@ public class GameFlowController : MonoBehaviour
     [Header("Menu settings")]
     [SerializeField] private ScenicCameraRig cameraRig;
     [SerializeField] private MenuController menu;
+	[SerializeField] private CreditsController credits;
     private Camera scenicCamera;
+    private AudioListener scenicAudioListener;
     private Canvas canvas;
 
     [Header("Player Settings")]
     [SerializeField] private KeyboardPlayerController player;
     private Camera playerCamera;
+    private AudioListener playerAudioListener;
     private Transform initialPlayerTransform;
 
     [Header("Fade Settings")]
@@ -23,7 +26,9 @@ public class GameFlowController : MonoBehaviour
     private void Awake()
     {
         scenicCamera = cameraRig.GetComponentInChildren<Camera>();
+        scenicAudioListener = scenicCamera.GetComponent<AudioListener>();
         playerCamera = player.GetComponentInChildren<Camera>();
+        playerAudioListener = playerCamera.GetComponent<AudioListener>();
         canvas = menu.GetComponent<Canvas>();
         
         initialPlayerTransform = player.gameObject.transform;
@@ -39,9 +44,10 @@ public class GameFlowController : MonoBehaviour
     private void SwitchToPlayer()
     {
         playerCamera.enabled = true;
-
+        playerAudioListener.enabled = true;
         cameraRig.active = false;
         scenicCamera.enabled = false;
+        scenicAudioListener.enabled = false;
 
         player.SetPlayerMovementLock(false);
     }
@@ -49,9 +55,11 @@ public class GameFlowController : MonoBehaviour
     private void SwitchToMenu()
     {
         cameraRig.active = true;
+        playerAudioListener.enabled = true;
         scenicCamera.enabled = true;
 
         playerCamera.enabled = false;
+        playerAudioListener.enabled = false;
         
         player.SetPlayerMovementLock(true);
     }
@@ -74,7 +82,9 @@ public class GameFlowController : MonoBehaviour
     public IEnumerator EndGame()
     {
         yield return fadeController.FadeOut(Color.white, fadeDuration);
-        // TODO: CHRISTIAN PUT THE CREDITS HERE
+		// TODO: CHRISTIAN PUT THE CREDITS HERE
+		StartCoroutine(credits.RollCredits());
+		//yield return credits.RollCredits();
         yield return new WaitForSeconds(contemplationTime);
         SwitchToMenu();
         ResetPlayer();
