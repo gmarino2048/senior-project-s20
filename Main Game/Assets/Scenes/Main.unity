@@ -637,7 +637,7 @@ MonoBehaviour:
   credits: {fileID: 1371892876}
   player: {fileID: 1559567114}
   fadeDuration: 2
-  contemplationTime: 35
+  contemplationTime: 20
 --- !u!4 &732849525
 Transform:
   m_ObjectHideFlags: 0
@@ -957,10 +957,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1371892876, guid: 78e729cce38bd704980d28f04c0f17e1, type: 3}
-      propertyPath: distanceToTravel
-      value: 4000
-      objectReference: {fileID: 0}
     - target: {fileID: 75122920693526339, guid: 78e729cce38bd704980d28f04c0f17e1,
         type: 3}
       propertyPath: m_Name

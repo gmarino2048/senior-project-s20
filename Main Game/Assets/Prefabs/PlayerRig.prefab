@@ -1013,7 +1013,7 @@ MonoBehaviour:
   start: {fileID: 0}
   end: {fileID: 1722341157}
   creditsScrollTime: 20
-  distanceToTravel: 3000
+  distanceToTravel: 4000
 --- !u!1 &7657344579308316510
 GameObject:
   m_ObjectHideFlags: 0

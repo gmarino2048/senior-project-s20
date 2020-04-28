@@ -13,14 +13,6 @@ public class CreditsController : MonoBehaviour
 
 	[SerializeField] private float creditsScrollTime, distanceToTravel;
 
-	public void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.C))
-		{
-			StartCoroutine(RollCredits());
-		}
-	}
-
 	private void Awake()
 	{
 		flowController = FindObjectOfType<GameFlowController>();
