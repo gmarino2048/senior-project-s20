@@ -11,14 +11,6 @@ public class CreditsController : MonoBehaviour
 
 	private GameFlowController flowController;
 
-	public void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.C))
-		{
-			StartCoroutine(RollCredits());
-		}
-	}
-
 	private void Awake()
 	{
 		flowController = FindObjectOfType<GameFlowController>();
