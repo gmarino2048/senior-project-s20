@@ -7,6 +7,7 @@ public class GameFlowController : MonoBehaviour
     [Header("Menu settings")]
     [SerializeField] private ScenicCameraRig cameraRig;
     [SerializeField] private MenuController menu;
+	[SerializeField] private CreditsController credits;
     private Camera scenicCamera;
     private Canvas canvas;
 
@@ -74,7 +75,9 @@ public class GameFlowController : MonoBehaviour
     public IEnumerator EndGame()
     {
         yield return fadeController.FadeOut(Color.white, fadeDuration);
-        // TODO: CHRISTIAN PUT THE CREDITS HERE
+		// TODO: CHRISTIAN PUT THE CREDITS HERE
+		StartCoroutine(credits.RollCredits());
+		//yield return credits.RollCredits();
         yield return new WaitForSeconds(contemplationTime);
         SwitchToMenu();
         ResetPlayer();
