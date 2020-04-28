@@ -6,7 +6,6 @@ public class PipeSegment : MonoBehaviour {
 	[SerializeField] protected float rotationTime = 0.5f;
 	[SerializeField] protected float flowThroughTime = 0.5f;
 	protected bool canRotate = true;
-	private AudioSource audioSource;
 
 	[SerializeField] private bool rotateOnStart = true;
 
@@ -20,7 +19,6 @@ public class PipeSegment : MonoBehaviour {
 
 	protected virtual void Start() {
 		originalScale = transform.localScale;
-		audioSource = GetComponent<AudioSource>();
 
 		if (rotateOnStart) {
 			int rotation = Random.Range(0, 4);
