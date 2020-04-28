@@ -44,7 +44,6 @@ public class PotionItem : HoldableObject {
 		splashParticles.Play();
 		glassBreak.Play();
 		effectSound.Play();
-		Debug.Log("Shattering");
 		rb.isKinematic = true;
 		glowLight.intensity = brokenLightIntensity;
 		GetComponent<MeshRenderer>().enabled = false;
