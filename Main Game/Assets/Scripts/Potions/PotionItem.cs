@@ -11,6 +11,7 @@ public class PotionItem : HoldableObject {
 	[SerializeField] protected ParticleSystem splashParticles, glassParticles;
 	protected Light glowLight;
 	[SerializeField] protected float brokenLightIntensity;
+	[SerializeField] protected AudioSource glassBreak, effectSound;
 
 	protected Rigidbody rb;
 
@@ -41,6 +42,8 @@ public class PotionItem : HoldableObject {
 	protected virtual IEnumerator Shatter() {
 		glassParticles.Play();
 		splashParticles.Play();
+		glassBreak.Play();
+		effectSound.Play();
 		rb.isKinematic = true;
 		glowLight.intensity = brokenLightIntensity;
 		GetComponent<MeshRenderer>().enabled = false;
