@@ -11,6 +11,8 @@ public class CreditsController : MonoBehaviour
 
 	private GameFlowController flowController;
 
+	[SerializeField] private float creditsScrollTime, distanceToTravel;
+
 	private void Awake()
 	{
 		flowController = FindObjectOfType<GameFlowController>();
@@ -18,14 +20,15 @@ public class CreditsController : MonoBehaviour
 
 	public IEnumerator RollCredits()
 	{
-		Debug.Log("Rolling credits");
 		RectTransform creditPosition = credits.GetComponent<RectTransform>();
-		Vector3 originalPosition = creditPosition.transform.position;
 
-		while(Vector3.Distance(creditPosition.transform.position, end.transform.position) > 0)
+		float timer = 0;
+
+		while(timer < creditsScrollTime)
 		{
-			creditPosition.transform.position = Vector3.Lerp(creditPosition.transform.position, end.transform.position, .001f);
-			yield return new WaitForFixedUpdate();
+			creditPosition.Translate(new Vector3(0, Time.deltaTime * (distanceToTravel / creditsScrollTime)));
+			timer += Time.deltaTime;
+			yield return new WaitForEndOfFrame();
 		}
 	}
 }

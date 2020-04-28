@@ -86,9 +86,6 @@ public class GameFlowController : MonoBehaviour
 		StartCoroutine(credits.RollCredits());
 		//yield return credits.RollCredits();
         yield return new WaitForSeconds(contemplationTime);
-        SwitchToMenu();
-        ResetPlayer();
-        yield return fadeController.FadeIn(fadeDuration);
-        canvas.enabled = true;
+        Application.Quit();
     }
 }
