@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Iceberg : PotionInteractionObject {
 	[SerializeField] private float growthDuration, meltDuration;
-	private float originalScale;
+	private Vector3 originalScale;
 
 	void Start() {
 		transform.Rotate(new Vector3(0, Random.Range(0, 360), 0));
-		originalScale = transform.localScale.x;
+		originalScale = transform.localScale;
 		transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 		StartCoroutine(Grow());
 	}
@@ -17,7 +17,7 @@ public class Iceberg : PotionInteractionObject {
 		float timer = 0;
 		while(timer < growthDuration) {
 			timer += Time.deltaTime;
-			transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(originalScale, 0.2f, originalScale), timer / growthDuration);
+			transform.localScale = Vector3.Lerp(transform.localScale, originalScale, timer / growthDuration);
 			yield return new WaitForEndOfFrame();
 		}
 	}
