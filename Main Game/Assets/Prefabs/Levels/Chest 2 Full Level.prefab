@@ -227,23 +227,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.56326896, y: 0.94769573, z: 1}
   m_Center: {x: 0.1429455, y: 0.2323246, z: 0}
---- !u!114 &3884771560777012401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2693395673240906838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b2f6b2a9d2c43c4d8461009b096489a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  requiredEffect: 1
-  waterPlane: {fileID: 6024636163652357121}
-  objectToDestroy: {fileID: 0}
-  raiseHeight: 1.5
-  raiseDuration: 3
 --- !u!82 &3884771559925923192
 AudioSource:
   m_ObjectHideFlags: 0
@@ -256,7 +239,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: cca64dfb17d834341b40733adea82439, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -340,6 +323,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3884771560777012401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2693395673240906838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b2f6b2a9d2c43c4d8461009b096489a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requiredEffect: 1
+  waterPlane: {fileID: 6024636163652357121}
+  objectToDestroy: {fileID: 0}
+  raiseHeight: 1.5
+  raiseDuration: 3
 --- !u!1 &2898930929932321474
 GameObject:
   m_ObjectHideFlags: 0
