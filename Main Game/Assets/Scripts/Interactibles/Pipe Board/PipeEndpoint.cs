@@ -7,10 +7,12 @@ public class PipeEndpoint : MonoBehaviour {
 	private PipeSegment pipe;
 	private ParticleSystem waterSprayEffect;
 	[SerializeField] private float errorSprayDuration = 2;
+	private AudioSource spraySound;
 
 	private void Start() {
 		pipe = GetComponentInParent<PipeSegment>();
 		waterSprayEffect = GetComponent<ParticleSystem>();
+		spraySound = GetComponent<AudioSource>();
 	}
 
 	public void InFlow(bool flowingForward) {
@@ -21,6 +23,7 @@ public class PipeEndpoint : MonoBehaviour {
 	}
 
 	private IEnumerator ErrorSpray() {
+		spraySound.Play();
 		waterSprayEffect.Play();
 		yield return new WaitForSeconds(errorSprayDuration);
 		waterSprayEffect.Stop();
