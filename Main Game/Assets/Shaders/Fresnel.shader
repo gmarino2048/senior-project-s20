@@ -1,4 +1,5 @@
 ﻿// Adapted from this tutorial from Kyle Halladay: http://kylehalladay.com/blog/tutorial/2014/02/18/Fresnel-Shaders-From-The-Ground-Up.html
+// Some additional functionality taken from this tutorial by Ronja Böhringer: https://www.ronja-tutorials.com/2018/05/26/fresnel.html
 Shader "Custom/Fresnel"
 {
     Properties
