@@ -1,4 +1,5 @@
-﻿Shader "Custom/Waves"
+﻿// Adapted from Catlike Coding wave shader tutorial: https://catlikecoding.com/unity/tutorials/flow/waves/
+Shader "Custom/Waves"
 {
     Properties
     {
